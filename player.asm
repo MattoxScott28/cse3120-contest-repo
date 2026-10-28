@@ -10,6 +10,16 @@ GetMove PROC
   cmp al, 'W'
   je Up
 
+  cmp al, 'A'
+  je Left
+
+  cmp al, 'S'
+  je Down
+
+  cmp al, 'D'
+  je Right
+
+  mov al, 0
   ret
 
 Up:
