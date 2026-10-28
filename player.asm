@@ -26,6 +26,18 @@ Up:
 mov al, 1
 ret
 
+Left:
+mov al, 2
+ret
+
+Down:
+mov al, 3
+ret
+
+Right:
+mov al, 4
+ret
+
 
 
 
