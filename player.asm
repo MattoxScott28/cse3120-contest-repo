@@ -9,14 +9,22 @@ GetMove PROC
   and AL, 0DFh
   cmp al, 'W'
   je Up
+  cmp ah, 48h
+  je Up
 
   cmp al, 'A'
+  je Left
+  cmp ah, 4Bh
   je Left
 
   cmp al, 'S'
   je Down
+  cmp ah, 50h
+  je Down
 
   cmp al, 'D'
+  je Right
+  cmp ah,4Dh
   je Right
 
   mov al, 0
