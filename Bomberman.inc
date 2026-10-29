@@ -2,3 +2,5 @@
 .386
 .stack 4096
 OPTION PROC:PRIVATE
+DisplayBoard PROTO
+GetMove PROTO
