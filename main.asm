@@ -1,5 +1,5 @@
-INCLUDE Irvine32.inc
-; INCLUDE Bomberman.inc this line currently causes a conflict
+INCLUDE Irvine32.inc ; This one probably declares the model?
+INCLUDE Bomberman.inc 
 
 ExitProcess PROTO, dwExitCode:DWORD
 
