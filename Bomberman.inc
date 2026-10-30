@@ -13,5 +13,5 @@ EMPTY EQU '.'
 PLAYER EQU 'P'
 
 ;procedure protos
-DisplayBoard PROTO
+DisplayMap PROTO
 GetMove PROTO

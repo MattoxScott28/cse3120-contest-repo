@@ -26,3 +26,8 @@ push esi
 push ebx
 push edi
 
+mov esi, OFFSET map
+
+mov ebx, MAP_HEIGHT
+
+
