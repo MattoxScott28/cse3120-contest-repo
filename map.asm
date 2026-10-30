@@ -32,6 +32,12 @@ DisplayMap PROC
 
 MapR:
 
+	mov edx, esi
+	mov ecx, 4
+
+DrawRow:
+	
+	mov esi, edx
 	mov edi, MAP_WIDTH
 
 MapC:
@@ -77,6 +83,7 @@ DrawTile:
 	call Crlf
 
 	;gotta do the same for the column just fixing the rows first
+	loop DrawRow
 
 
 	dec ebx
