@@ -34,9 +34,4 @@
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <MASM Include="..\Bomberman.asm">
-      <Filter>Source Files</Filter>
-    </MASM>
-  </ItemGroup>
 </Project>

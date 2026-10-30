@@ -134,9 +134,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <MASM Include="..\Bomberman.asm">
-      <FileType>Document</FileType>
-    </MASM>
     <None Include="..\Bomberman.inc" />
     <None Include="..\map.asm" />
     <None Include="..\loading-screen.asm" />

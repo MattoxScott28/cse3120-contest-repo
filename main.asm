@@ -42,6 +42,7 @@ main PROC
 exit
     
     ;INVOKE ExitProcess, 0
+    ;using exit from irvine instead of doing exitprocess
 
 main ENDP
 END main
