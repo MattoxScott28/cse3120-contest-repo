@@ -59,6 +59,7 @@ DrawPlayer:
 DrawTile:
 
 	call SetTextColor
+
 	mov al, 219
 	call WriteChar
 	call WriteChar
@@ -70,8 +71,14 @@ DrawTile:
 
 	call Crlf
 
+	;gotta do the same for the column just fixing the rows first
+
+
 	dec ebx
 	jnz MapR
+
+	mov eax, 07h
+	call SetTextColor
 
 	pop edi
 	pop ebx
