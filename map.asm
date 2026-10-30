@@ -16,6 +16,8 @@ INCLUDE Bomberman.inc
 			"#.............#", 
 			"###############",0
 
+rowS DWORD ?
+
 ; Want to make the layout grid into 15 x 13 with the walls that do not break as #, player as P, and breakable walls as 0, all other spots are .
 
 .code
@@ -32,12 +34,12 @@ DisplayMap PROC
 
 MapR:
 
-	mov edx, esi
-	mov ecx, 4
+	mov rowS, esi
+	mov ecx, 2
 
 DrawRow:
 	
-	mov esi, edx
+	mov esi, rowS
 	mov edi, MAP_WIDTH
 
 MapC:
@@ -85,6 +87,8 @@ DrawTile:
 	;gotta do the same for the column just fixing the rows first
 	loop DrawRow
 
+	mov esi, rowS
+	add esi, MAP_WIDTH
 
 	dec ebx
 	jnz MapR
