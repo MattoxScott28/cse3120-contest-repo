@@ -9,6 +9,9 @@ ExitProcess PROTO, dwExitCode:DWORD
 .data
 myString BYTE "Press W to begin",0
 myString2 BYTE "PLACEHOLDER Game has begun",0
+; Variables we will use to keep track of the player
+xPos BYTE 0
+yPos BYTE 0
 .code
 main PROC
 

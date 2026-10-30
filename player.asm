@@ -67,7 +67,9 @@ mov al, 4
 ret
 
 Bomb:
-; Unsure what to do with this yet
+; Once again reads char for wasd or arrow key, the player can place the bomb in any of their cardinal directions
+; Does the same checks as up, down, left, right (we could possibly reuse the labels with some code rewriting?)
+; Once the bomb is placed, I'm not sure whether we want it to be timed (if thats feasible) or if we want it to be reactive, once the player moves twice
 ret
 
 
