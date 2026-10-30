@@ -1,5 +1,8 @@
 INCLUDE Irvine32.inc
 
+.data
+message BYTE "Bomberman is working!", 0
+
 .code
 main PROC
 
@@ -10,8 +13,5 @@ main PROC
 
     exit
 main ENDP
-
-.data
-message BYTE "Irvine32 is working!", 0
 
 END main

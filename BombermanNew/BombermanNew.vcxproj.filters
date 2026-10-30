@@ -15,10 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Bomberman.asm">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\gameboard.asm">
+    <None Include="..\map.asm">
       <Filter>Source Files</Filter>
     </None>
     <None Include="..\loading-screen.asm">
@@ -36,5 +33,10 @@
     <None Include="..\Bomberman.inc">
       <Filter>Header Files</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="..\Bomberman.asm">
+      <Filter>Source Files</Filter>
+    </MASM>
   </ItemGroup>
 </Project>
