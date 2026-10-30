@@ -66,6 +66,8 @@ DrawTile:
 	mov al, 219
 	call WriteChar
 	call WriteChar
+	call WriteChar
+	call WriteChar
 
 	inc esi
 	dec edi
