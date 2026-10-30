@@ -135,9 +135,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="..\Bomberman.inc" />
-    <None Include="..\map.asm" />
+    <MASM Include="..\map.asm">
+      <FileType>Document</FileType>
+    </MASM>
     <None Include="..\loading-screen.asm" />
-    <None Include="..\main.asm" />
+    <MASM Include="..\main.asm">
+      <FileType>Document</FileType>
+    </MASM>
     <None Include="..\player.asm" />
     <None Include="..\README.md" />
   </ItemGroup>
