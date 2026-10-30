@@ -36,8 +36,12 @@ MapR:
 
 MapC:
 
-	mov al, [esi]
-	call WriteChar
+	mov dl, [esi]
+
+	cmp dl, WALL
+	cmp dl, BLOCK
+	cmp dl, PLAYER
+	;this be a tile then
 
 	inc esi
 	dec edi

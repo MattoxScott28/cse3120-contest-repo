@@ -1,8 +1,8 @@
-.stack 4096
-
 INCLUDE Irvine32.inc ; This one probably declares the model?
 ;if we declare it in bomberman.inc we should be all good, gonna keep it here for now just because redundancy
 INCLUDE Bomberman.inc 
+
+.stack 4096
 
 ExitProcess PROTO, dwExitCode:DWORD
 
