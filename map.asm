@@ -22,12 +22,40 @@ INCLUDE Bomberman.inc
 
 DisplayMap PROC
 
-push esi
-push ebx
-push edi
+	push esi
+	push ebx
+	push edi
 
-mov esi, OFFSET map
+	mov esi, OFFSET map
 
-mov ebx, MAP_HEIGHT
+	mov ebx, MAP_HEIGHT
 
+MapR:
+
+	mov edi, MAP_WIDTH
+
+MapC:
+
+	mov al, [esi]
+	call WriteChar
+
+	inc esi
+	dec edi
+
+	jnz MapC
+
+	call Crlf
+
+	dec ebx
+	jnz MapR
+
+	pop edi
+	pop ebx
+	pop esi
+
+	ret
+
+	DisplayMap ENDP
+
+END
 
