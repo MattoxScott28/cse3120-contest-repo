@@ -58,7 +58,10 @@ DrawPlayer:
 
 DrawTile:
 
-
+	call SetTextColor
+	mov al, 219
+	call WriteChar
+	call WriteChar
 
 	inc esi
 	dec edi
