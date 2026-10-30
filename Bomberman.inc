@@ -7,9 +7,13 @@
 MAP_WIDTH EQU 15
 MAP_HEIGHT EQU 13
 
+;characters for the Board
 
+WALL EQU '#'
+BLOCK EQU '0'
+EMPTY EQU '.'
+PLAYER EQU 'P'
 
-
-
+;procedure protos
 DisplayBoard PROTO
 GetMove PROTO
