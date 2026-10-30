@@ -40,18 +40,30 @@ GetMove PROC
 
 Up:
 mov al, 1
+; Check if map[playerX][playerY-1] is an available space
+; If true, move player to PlayerX, PlayerY - 1
+; Get Player X and Y coord and set them somewhere, we will need these variables stored somehow
 ret
 
 Left:
 mov al, 2
+; Check if map[playerX-1][playerY] is an available space
+; If true, move player to PlayerX-1, PlayerY
+; Get Player X and Y coord and set them somewhere, we will need these variables stored somehow
 ret
 
 Down:
 mov al, 3
+; Check if map[playerX][playerY+1] is an available space
+; If true, move player to PlayerX, PlayerY + 1
+; Get Player X and Y coord and set them somewhere, we will need these variables stored somehow
 ret
 
 Right:
 mov al, 4
+; Check if map[playerX+1][playerY] is an available space
+; If true, move player to PlayerX+1, PlayerY
+; Get Player X and Y coord and set them somewhere, we will need these variables stored somehow
 ret
 
 Bomb:
