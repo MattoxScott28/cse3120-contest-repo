@@ -49,6 +49,16 @@ MapC:
 	mov eax, 08h
 	jmp DrawTile
 
+DrawWall:
+	jmp DrawTile
+DrawBlock:
+	jmp DrawTile
+DrawPlayer:
+	jmp DrawTile
+
+DrawTile:
+
+
 
 	inc esi
 	dec edi
