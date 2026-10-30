@@ -19,14 +19,10 @@ INCLUDE Bomberman.inc
 ; Want to make the layout grid into 15 x 13 with the walls that do not break as #, player as P, and breakable walls as 0, all other spots are .
 
 .code
-PUBLIC DisplayBoard
 
-DisplayBoard PROC
+DisplayMap PROC
 
-mov edx, OFFSET row1
-#offset puts the memory address where row1 starts
+push esi
+push ebx
+push edi
 
-call WriteString
-ret
-
-DisplayBoard ENDP
