@@ -1,5 +1,4 @@
 .386
-.stack 4096
 
 ; OPTION PROC:PRIVATE currently this raises an error when linking, we probably want them private but we will keep this commented out for now
 
@@ -8,7 +7,6 @@ MAP_WIDTH EQU 15
 MAP_HEIGHT EQU 13
 
 ;characters for the Board
-
 WALL EQU '#'
 BLOCK EQU '0'
 EMPTY EQU '.'

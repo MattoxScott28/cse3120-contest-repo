@@ -1,3 +1,6 @@
+;i actually might be stupid
+.stack 4096
+
 INCLUDE Irvine32.inc ; This one probably declares the model?
 INCLUDE Bomberman.inc 
 
