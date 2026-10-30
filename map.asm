@@ -50,10 +50,13 @@ MapC:
 	jmp DrawTile
 
 DrawWall:
+	mov eax, 07h
 	jmp DrawTile
 DrawBlock:
+	mov eax, 0Eh
 	jmp DrawTile
 DrawPlayer:
+	mov eax, 0Ah
 	jmp DrawTile
 
 DrawTile:
