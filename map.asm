@@ -39,9 +39,16 @@ MapC:
 	mov dl, [esi]
 
 	cmp dl, WALL
+	je DrawWall
 	cmp dl, BLOCK
+	je DrawBlock
 	cmp dl, PLAYER
-	;this be a tile then
+	je DrawPlayer
+
+	;the floor is floor
+	mov eax, 08h
+	jmp DrawTile
+
 
 	inc esi
 	dec edi
