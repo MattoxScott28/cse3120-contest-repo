@@ -1,7 +1,7 @@
 INCLUDE Irvine32.inc
 INCLUDE Bomberman.inc
 
-; .data
+.data
 ; row1 BYTE "###############",0
 ; row2 BYTE "#P............#",0
 ; row3 BYTE "#.#.#.#.#.#.#.#",0
@@ -14,9 +14,7 @@ INCLUDE Bomberman.inc
 ; row10 BYTE "#.............#",0 
 ; row11 BYTE "#.#.#.#.#.#.#.#",0 
 ; row12 BYTE "#.............#",0 
-; row13 BYTE "###############",0 ;13=1
-; My current understanding is that these would be defined in main, and would be externally defined in the include file?
-; will be doing that, just wanted a place to put them for now
+; row13 BYTE "###############",0
 
 ; Want to make the layout grid into 15 x 13 with the walls that do not break as #, player as P, and breakable walls as 0, all other spots are .
 
