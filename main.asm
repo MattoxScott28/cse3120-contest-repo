@@ -2,6 +2,7 @@
 .stack 4096
 
 INCLUDE Irvine32.inc ; This one probably declares the model?
+;if we declare it in bomberman.inc we should be all good, gonna keep it here for now just because redundancy
 INCLUDE Bomberman.inc 
 
 ExitProcess PROTO, dwExitCode:DWORD
@@ -32,10 +33,15 @@ main PROC
     ; Begin the game
     begin:
      call clrscr
-     mov edx,OFFSET myString2
-     call WriteString
+
+     ;mov edx,OFFSET myString2
+     ;call WriteString
+     call DisplayMap
+     call ReadChar
+
+exit
     
-    INVOKE ExitProcess, 0
+    ;INVOKE ExitProcess, 0
 
 main ENDP
 END main
