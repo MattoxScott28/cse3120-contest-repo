@@ -1,0 +1,29 @@
+# Visual Studio cache
+.vs/
+*.suo
+*.user
+
+# Visual Studio databases
+*.db
+*.db-shm
+*.db-wal
+*.opendb
+
+# Visual Studio temporary files
+DocumentLayout.json
+FileContentIndex/
+
+# Build output
+Debug/
+Release/
+x86/
+x64/
+
+# Compiled files
+*.obj
+*.pdb
+*.ilk
+*.exe
+*.tlog
+*.idb
+*.pch
