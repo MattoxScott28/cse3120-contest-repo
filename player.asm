@@ -1,5 +1,8 @@
 INCLUDE Irvine32.inc
+INCLUDE Bomberman.inc
 
+.data
+myString3 BYTE "GetMove is working",0
 .code
 PUBLIC GetMove
 
@@ -39,7 +42,8 @@ GetMove PROC x:BYTE, y:BYTE
   ret
 
 Up:
-mov al, 1
+mov edx, OFFSET myString3
+call WriteString
 ; Check if map[playerX][playerY-1] is an available space
 ; If true, move player to PlayerX, PlayerY - 1
 ; Get Player X and Y coord and set them somewhere, we will need these variables stored somehow
@@ -76,3 +80,4 @@ ret
 
 
 GetMove ENDP
+END

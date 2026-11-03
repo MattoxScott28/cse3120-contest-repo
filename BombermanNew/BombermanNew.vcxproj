@@ -142,7 +142,9 @@
     <MASM Include="..\main.asm">
       <FileType>Document</FileType>
     </MASM>
-    <None Include="..\player.asm" />
+    <MASM Include="..\player.asm">
+      <FileType>Document</FileType>
+    </MASM>
     <None Include="..\README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

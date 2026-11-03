@@ -18,9 +18,6 @@
     <None Include="..\loading-screen.asm">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="..\player.asm">
-      <Filter>Source Files</Filter>
-    </None>
     <None Include="..\README.md">
       <Filter>Source Files</Filter>
     </None>
@@ -33,6 +30,9 @@
       <Filter>Source Files</Filter>
     </MASM>
     <MASM Include="..\main.asm">
+      <Filter>Source Files</Filter>
+    </MASM>
+    <MASM Include="..\player.asm">
       <Filter>Source Files</Filter>
     </MASM>
   </ItemGroup>
