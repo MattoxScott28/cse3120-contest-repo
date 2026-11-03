@@ -14,4 +14,4 @@ PLAYER EQU 'P'
 
 ;procedure protos
 DisplayMap PROTO
-GetMove PROTO
+GetMove PROTO x:BYTE, y:BYTE

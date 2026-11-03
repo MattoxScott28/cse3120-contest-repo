@@ -3,7 +3,7 @@ INCLUDE Irvine32.inc
 .code
 PUBLIC GetMove
 
-GetMove PROC
+GetMove PROC x:BYTE, y:BYTE
   call ReadChar
 
   and AL, 0DFh
