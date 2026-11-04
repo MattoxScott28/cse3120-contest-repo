@@ -35,9 +35,21 @@ RandCell:
 
 GenWall:
 	
-	; BYTE PTR [esi], WALL
+	mov BYTE PTR [esi], WALL
+	jmp NextCell
 GenBlock:
-; NextCell?
+	mov BYTE PTR [esi], BLOCK
+NextCell:
+	inc esi
+	inc edi
+
+	;stuff
+
+	inc ebx
+
+	;more compare stuff
+
+	
 
 
 GenMap ENDP
