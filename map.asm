@@ -23,6 +23,24 @@ GenMap Proc
 
 MapGenR:
 MapGenC:
+
+
+	;if you are on the outside of an array then you generate a wall
+	
+	cmp ebx, 0
+	je GenWall
+
+	cmp ebx, MAP_HEIGHT-1
+	je GenWall
+
+	cmp edi, 0
+	je GenWall
+
+	cmp edi, MAP_WIDTH-1
+	je GenWall
+	
+
+
 RandCell:
 	mov eax, 4
 	call RandomRange ;random range is an Irvine command that will generate a random number from 0 to the number called minus 1
