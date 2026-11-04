@@ -145,6 +145,24 @@ add xPos,1
 ret
 
 Bomb:
+mov esi, 1
+
+call ReadChar
+and AL, 0DFh
+
+cmp al, 'W'
+je Up
+
+cmp al, 'A'
+je Left
+
+cmp al, 'S'
+je Down
+
+cmp al, 'D'
+je Right
+
+
 ; Once again reads char for wasd or arrow key, the player can place the bomb in any of their cardinal directions
 ; Does the same checks as up, down, left, right (we could possibly reuse the labels with some code rewriting?)
 ; Once the bomb is placed, I'm not sure whether we want it to be timed (if thats feasible) or if we want it to be reactive, once the player moves twice
