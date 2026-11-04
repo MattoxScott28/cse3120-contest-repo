@@ -70,25 +70,56 @@ sub yPos,1
 ret
 
 Left:
-mov al, 2
 ; Check if map[playerX-1][playerY] is an available space
 cmp xPos, 0
 je Invalid
+
+movzx eax, xPos
+dec eax
+
+imul eax, 13
+
+movzx ebx, yPos
+add eax,ebx
+
+; mov dl, map[eax] READD THIS LINE ONCE MAP HAS BEEN PUBLICLY DECLARED
+
+cmp dl, 'X'
+je Invalid
+
+cmp dl, 'U'
+je Invalid
+
 ; If true, move player to PlayerX-1, PlayerY
 sub xPos,1
 ret
 
 Down:
-mov al, 3
 ; Check if map[playerX][playerY+1] is an available space
 cmp yPos, 12
 je Invalid
+
+movzx eax, yPos
+inc eax
+
+imul eax, 15
+
+movzx ebx, xPos
+add eax,ebx
+
+; mov dl, map[eax] READD THIS LINE ONCE MAP HAS BEEN PUBLICLY DECLARED
+
+cmp dl, 'X'
+je Invalid
+
+cmp dl, 'U'
+je Invalid
+
 ; If true, move player to PlayerX, PlayerY + 1
 add yPos,1
 ret
 
 Right:
-mov al, 4
 ; Check if map[playerX+1][playerY] is an available space
 cmp xPos, 14
 je Invalid
