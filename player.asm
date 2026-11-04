@@ -123,6 +123,23 @@ Right:
 ; Check if map[playerX+1][playerY] is an available space
 cmp xPos, 14
 je Invalid
+
+movzx eax, xPos
+inc eax
+
+imul eax, 13
+
+movzx ebx, yPos
+add eax,ebx
+
+; mov dl, map[eax] READD THIS LINE ONCE MAP HAS BEEN PUBLICLY DECLARED
+
+cmp dl, 'X'
+je Invalid
+
+cmp dl, 'U'
+je Invalid
+
 ; If true, move player to PlayerX+1, PlayerY
 add xPos,1
 ret
