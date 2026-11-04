@@ -11,6 +11,33 @@ rowS DWORD ?
 
 .code
 
+GenMap Proc
+
+	push eax
+	push ebx ;tracking row
+	push edi ;tracking col
+	push esi ;poiting to curr location
+
+	mov esi, OFFSET map
+	mov ebx, 0
+
+MapGenR:
+MapGenC:
+RandCell:
+	mov eax, 4
+	call RandomRange ;random range is an Irvine command that will generate a random number from 0 to the number called minus 1
+
+	cmp eax, 0 ;trying to make this a 25% chance of a destructible block
+	je GenBlock
+GenWall:
+GenBlock:
+; NextCell?
+
+
+GenMap ENDP
+
+
+
 DisplayMap PROC
 
 	push esi
