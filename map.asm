@@ -43,11 +43,23 @@ NextCell:
 	inc esi
 	inc edi
 
-	;stuff
+	cmp edi, MAP_WIDTH
+	jl MapGenC
 
 	inc ebx
 
-	;more compare stuff
+	cmp ebx, MAP_HEIGHT
+	jl MapGenR
+
+	mov BYTE PTR map[16], PLAYER
+
+	pop esi
+	pop edi
+	pop ebx
+	pop eax
+	ret
+
+	GenMap ENDP
 
 	
 
