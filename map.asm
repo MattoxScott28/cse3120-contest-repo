@@ -11,6 +11,20 @@ rowS DWORD ?
 
 .code
 
+GenMap Proc
+
+MapGenR:
+MapGenC:
+RandCell:
+GenWall:
+GenBlock:
+; NextCell?
+
+
+GenMap ENDP
+
+
+
 DisplayMap PROC
 
 	push esi
