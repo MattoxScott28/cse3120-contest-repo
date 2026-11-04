@@ -59,12 +59,15 @@ add eax,ebx
 
 ; mov dl, map[eax] READD THIS LINE ONCE MAP HAS BEEN PUBLICLY DECLARED
 
+; If the tile the player is trying to move to is a wall or breakable block, jump to Invalid
 cmp dl, 'X'
 je Invalid
 
 cmp dl, 'U'
 je Invalid
 
+
+; If the player is in bomb placing mode (esi = 1), jump to BombPlaceUp
 cmp esi, 0
 jne BombPlaceUp
 
@@ -87,12 +90,14 @@ add eax,ebx
 
 ; mov dl, map[eax] READD THIS LINE ONCE MAP HAS BEEN PUBLICLY DECLARED
 
+; If the tile the player is trying to move to is a wall or breakable block, jump to Invalid
 cmp dl, 'X'
 je Invalid
 
 cmp dl, 'U'
 je Invalid
 
+; If the player is in bomb placing mode (esi = 1), jump to BombPlaceLeft
 cmp esi,0
 jne BombPlaceLeft
 
@@ -115,12 +120,14 @@ add eax,ebx
 
 ; mov dl, map[eax] READD THIS LINE ONCE MAP HAS BEEN PUBLICLY DECLARED
 
+; If the tile the player is trying to move to is a wall or breakable block, jump to Invalid
 cmp dl, 'X'
 je Invalid
 
 cmp dl, 'U'
 je Invalid
 
+; If the player is in bomb placing mode (esi = 1), jump to BombPlaceDown
 cmp esi,0
 jne BombPlaceDown
 
@@ -143,12 +150,15 @@ add eax,ebx
 
 ; mov dl, map[eax] READD THIS LINE ONCE MAP HAS BEEN PUBLICLY DECLARED
 
+
+; If the tile the player is trying to move to is a wall or breakable block, jump to Invalid
 cmp dl, 'X'
 je Invalid
 
 cmp dl, 'U'
 je Invalid
 
+; If the player is in bomb placing mode (esi = 1), jump to BombPlaceRight
 cmp esi,0
 jne BombPlaceRight
 
@@ -157,8 +167,11 @@ add xPos,1
 ret
 
 Bomb:
+
+; Set esi to 1 to indicate bomb placement mode
 mov esi, 1
 
+; Read char, same as before but for bomb placement
 call ReadChar
 and AL, 0DFh
 
