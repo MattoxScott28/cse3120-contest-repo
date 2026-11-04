@@ -13,6 +13,14 @@ rowS DWORD ?
 
 GenMap Proc
 
+	push eax
+	push ebx ;tracking row
+	push edi ;tracking col
+	push esi ;poiting to curr location
+
+	mov esi, OFFSET map
+	mov ebx, 0
+
 MapGenR:
 MapGenC:
 RandCell:
