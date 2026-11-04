@@ -17,5 +17,6 @@ EXTERNDEF xPos : BYTE
 EXTERNDEF yPos : BYTE
 
 ;procedure protos
+GenMap PROTO
 DisplayMap PROTO
 GetMove PROTO

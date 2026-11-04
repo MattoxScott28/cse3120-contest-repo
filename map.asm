@@ -42,11 +42,11 @@ MapGenC:
 	cmp edi, MAP_WIDTH-1
 	je GenWall
 	
-	test ebx, 1
-	jnx RandomCell
+	;test ebx, 1
+	;jnz RandCell
 
-	test edi, 1
-	jz GenWall
+	;test edi, 1
+	;jz GenWall
 
 RandCell:
 	mov eax, 4
@@ -77,6 +77,8 @@ NextCell:
 	jl MapGenR
 
 	mov BYTE PTR map[16], PLAYER
+	mov BYTE PTR map[17], EMPTY
+	mov BYTE PTR map[31], EMPTY
 
 	pop esi
 	pop edi
@@ -85,11 +87,6 @@ NextCell:
 	ret
 
 	GenMap ENDP
-
-	
-
-
-GenMap ENDP
 
 
 

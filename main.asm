@@ -38,6 +38,10 @@ main PROC
 
      ;mov edx,OFFSET myString2
      ;call WriteString
+     call GenMap
+     mov xPos, 1
+     mov yPos, 1
+
      call DisplayMap
      call ReadChar
      call GetMove
