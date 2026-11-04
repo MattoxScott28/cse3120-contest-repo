@@ -22,6 +22,9 @@ GenMap Proc
 	mov ebx, 0
 
 MapGenR:
+
+	mov edi, 0
+
 MapGenC:
 
 
@@ -39,7 +42,11 @@ MapGenC:
 	cmp edi, MAP_WIDTH-1
 	je GenWall
 	
+	test ebx, 1
+	jnx RandomCell
 
+	test edi, 1
+	jz GenWall
 
 RandCell:
 	mov eax, 4
