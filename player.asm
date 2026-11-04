@@ -44,11 +44,27 @@ GetMove PROC
   ret
 
 Up:
-mov edx, OFFSET myString3
-call WriteString
+
 ; Check if map[playerX][playerY-1] is an available space
 cmp yPos, 0
 je Invalid
+
+movzx eax, yPos
+dec eax
+
+imul eax, 15
+
+movzx ebx, xPos
+add eax,ebx
+
+; mov dl, map[eax] READD THIS LINE ONCE MAP HAS BEEN PUBLICLY DECLARED
+
+cmp dl, 'X'
+je Invalid
+
+cmp dl, 'U'
+je Invalid
+
 ; If true, move player to PlayerX, PlayerY - 1
 sub yPos,1
 ret
