@@ -29,7 +29,13 @@ RandCell:
 
 	cmp eax, 0 ;trying to make this a 25% chance of a destructible block
 	je GenBlock
+
+	mov BYTE PTR [esi], EMPTY
+	jmp NextCell
+
 GenWall:
+	
+	; BYTE PTR [esi], WALL
 GenBlock:
 ; NextCell?
 
