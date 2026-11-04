@@ -65,6 +65,9 @@ je Invalid
 cmp dl, 'U'
 je Invalid
 
+cmp esi, 0
+jne BombPlaceUp
+
 ; If true, move player to PlayerX, PlayerY - 1
 sub yPos,1
 ret
@@ -89,6 +92,9 @@ je Invalid
 
 cmp dl, 'U'
 je Invalid
+
+cmp esi,0
+jne BombPlaceLeft
 
 ; If true, move player to PlayerX-1, PlayerY
 sub xPos,1
@@ -115,6 +121,9 @@ je Invalid
 cmp dl, 'U'
 je Invalid
 
+cmp esi,0
+jne BombPlaceDown
+
 ; If true, move player to PlayerX, PlayerY + 1
 add yPos,1
 ret
@@ -139,6 +148,9 @@ je Invalid
 
 cmp dl, 'U'
 je Invalid
+
+cmp esi,0
+jne BombPlaceRight
 
 ; If true, move player to PlayerX+1, PlayerY
 add xPos,1
