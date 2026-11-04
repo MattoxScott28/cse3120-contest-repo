@@ -80,12 +80,12 @@ Left:
 cmp xPos, 0
 je Invalid
 
-movzx eax, xPos
-dec eax
+movzx eax, yPos
+imul eax, 15
 
-imul eax, 13
+movzx ebx, xPos
+dec ebx
 
-movzx ebx, yPos
 add eax,ebx
 
 ; mov dl, map[eax] READD THIS LINE ONCE MAP HAS BEEN PUBLICLY DECLARED
@@ -140,12 +140,12 @@ Right:
 cmp xPos, 14
 je Invalid
 
-movzx eax, xPos
-inc eax
+movzx eax, yPos
+imul eax, MAP_WIDTH
 
-imul eax, 13
+movzx ebx, xPos
+inc ebx
 
-movzx ebx, yPos
 add eax,ebx
 
 ; mov dl, map[eax] READD THIS LINE ONCE MAP HAS BEEN PUBLICLY DECLARED
