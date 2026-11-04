@@ -40,7 +40,7 @@ main PROC
      ;call WriteString
      call DisplayMap
      call ReadChar
-     INVOKE GetMove, xPos, yPos
+     call GetMove
 
 exit
     

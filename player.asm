@@ -3,10 +3,12 @@ INCLUDE Bomberman.inc
 
 .data
 myString3 BYTE "GetMove is working",0
+EXTERN xPos : BYTE
+EXTERN yPos : BYTE
 .code
 PUBLIC GetMove
 
-GetMove PROC x:BYTE, y:BYTE
+GetMove PROC
   call ReadChar
 
   and AL, 0DFh
@@ -46,6 +48,7 @@ mov edx, OFFSET myString3
 call WriteString
 ; Check if map[playerX][playerY-1] is an available space
 ; If true, move player to PlayerX, PlayerY - 1
+sub yPos,1
 ; Get Player X and Y coord and set them somewhere, we will need these variables stored somehow
 ret
 

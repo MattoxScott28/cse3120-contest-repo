@@ -12,6 +12,10 @@ BLOCK EQU '0'
 EMPTY EQU '.'
 PLAYER EQU 'P'
 
+;Player variables
+EXTERNDEF xPos : BYTE
+EXTERNDEF yPos : BYTE
+
 ;procedure protos
 DisplayMap PROTO
-GetMove PROTO x:BYTE, y:BYTE
+GetMove PROTO
