@@ -24,6 +24,11 @@ GenMap Proc
 MapGenR:
 MapGenC:
 RandCell:
+	mov eax, 4
+	call RandomRange ;random range is an Irvine command that will generate a random number from 0 to the number called minus 1
+
+	cmp eax, 0 ;trying to make this a 25% chance of a destructible block
+	je GenBlock
 GenWall:
 GenBlock:
 ; NextCell?
