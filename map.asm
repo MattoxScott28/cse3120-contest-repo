@@ -77,6 +77,8 @@ NextCell:
 	jl MapGenR
 
 	mov BYTE PTR map[16], PLAYER
+	mov BYTE PTR map[17], EMPTY
+	mov BYTE PTR map[31], EMPTY
 
 	pop esi
 	pop edi
