@@ -75,6 +75,10 @@ jne BombPlaceUp
 sub yPos,1
 ret
 
+BombPlaceUp:
+
+ret
+
 Left:
 ; Check if map[playerX-1][playerY] is an available space
 cmp xPos, 0
@@ -103,6 +107,10 @@ jne BombPlaceLeft
 
 ; If true, move player to PlayerX-1, PlayerY
 sub xPos,1
+ret
+
+BombPlaceLeft:
+
 ret
 
 Down:
@@ -135,6 +143,10 @@ jne BombPlaceDown
 add yPos,1
 ret
 
+BombPlaceDown:
+
+ret
+
 Right:
 ; Check if map[playerX+1][playerY] is an available space
 cmp xPos, 14
@@ -164,6 +176,10 @@ jne BombPlaceRight
 
 ; If true, move player to PlayerX+1, PlayerY
 add xPos,1
+ret
+
+BombPlaceRight:
+
 ret
 
 Bomb:
