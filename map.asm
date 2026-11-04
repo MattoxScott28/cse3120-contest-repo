@@ -11,6 +11,8 @@ rowS DWORD ?
 
 .code
 
+;GenMap creates a random map (no duh)
+
 GenMap Proc
 
 	push eax
@@ -21,10 +23,12 @@ GenMap Proc
 	mov esi, OFFSET map
 	mov ebx, 0
 
+;generating row
 MapGenR:
 
 	mov edi, 0
 
+;generating col
 MapGenC:
 
 
@@ -41,6 +45,8 @@ MapGenC:
 
 	cmp edi, MAP_WIDTH-1
 	je GenWall
+
+	;testing shenanigans
 	
 	;test ebx, 1
 	;jnz RandCell
@@ -55,6 +61,7 @@ RandCell:
 	cmp eax, 0 ;trying to make this a 25% chance of a destructible block
 	je GenBlock
 
+	;if compare fails then its an empty block
 	mov BYTE PTR [esi], EMPTY
 	jmp NextCell
 
