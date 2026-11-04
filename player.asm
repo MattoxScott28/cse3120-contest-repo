@@ -69,7 +69,7 @@ je Invalid
 
 ; If the player is in bomb placing mode (esi = 1), jump to BombPlaceUp
 cmp esi, 0
-jne BombPlaceUp
+;jne BombPlaceUp
 
 ; If true, move player to PlayerX, PlayerY - 1
 sub yPos,1
@@ -99,8 +99,7 @@ je Invalid
 
 ; If the player is in bomb placing mode (esi = 1), jump to BombPlaceLeft
 cmp esi,0
-jne BombPlaceLeft
-
+;jne BombPlaceLeft
 ; If true, move player to PlayerX-1, PlayerY
 sub xPos,1
 ret
@@ -129,7 +128,7 @@ je Invalid
 
 ; If the player is in bomb placing mode (esi = 1), jump to BombPlaceDown
 cmp esi,0
-jne BombPlaceDown
+;jne BombPlaceDown
 
 ; If true, move player to PlayerX, PlayerY + 1
 add yPos,1
@@ -160,7 +159,7 @@ je Invalid
 
 ; If the player is in bomb placing mode (esi = 1), jump to BombPlaceRight
 cmp esi,0
-jne BombPlaceRight
+;jne BombPlaceRight
 
 ; If true, move player to PlayerX+1, PlayerY
 add xPos,1

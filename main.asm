@@ -15,6 +15,8 @@ yPos BYTE 0
 .code
 main PROC
 
+    call Randomize
+
     ; Set the cursor to the center of the screen and write Press W to begin
     mov dh,15
     mov dl,55
