@@ -42,11 +42,11 @@ MapGenC:
 	cmp edi, MAP_WIDTH-1
 	je GenWall
 	
-	test ebx, 1
-	jnx RandomCell
+	;test ebx, 1
+	;jnz RandCell
 
-	test edi, 1
-	jz GenWall
+	;test edi, 1
+	;jz GenWall
 
 RandCell:
 	mov eax, 4
@@ -85,11 +85,6 @@ NextCell:
 	ret
 
 	GenMap ENDP
-
-	
-
-
-GenMap ENDP
 
 
 
