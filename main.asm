@@ -12,6 +12,7 @@ myString2 BYTE "PLACEHOLDER Game has begun",0
 ; Variables we will use to keep track of the player
 xPos BYTE 0
 yPos BYTE 0
+finish BYTE 0
 .code
 main PROC
 
@@ -43,11 +44,14 @@ main PROC
      call GenMap
      mov xPos, 1
      mov yPos, 1
-
+    game:
+     call clrscr
      call DisplayMap
-     call ReadChar
      call GetMove
-
+     cmp finish,1
+     je gameEnd
+     jmp game
+gameEnd:
 exit
     
     ;INVOKE ExitProcess, 0
