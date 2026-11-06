@@ -46,7 +46,7 @@ GetMove PROC
 Up:
 
 ; Check if map[playerX][playerY-1] is an available space
-cmp yPos, 0
+cmp yPos, 1
 je Invalid
 
 movzx eax, yPos
@@ -81,7 +81,7 @@ ret
 
 Left:
 ; Check if map[playerX-1][playerY] is an available space
-cmp xPos, 0
+cmp xPos, 1
 je Invalid
 
 movzx eax, yPos
@@ -114,7 +114,7 @@ ret
 
 Down:
 ; Check if map[playerX][playerY+1] is an available space
-cmp yPos, 12
+cmp yPos, 11
 je Invalid
 
 movzx eax, yPos
@@ -148,7 +148,7 @@ ret
 
 Right:
 ; Check if map[playerX+1][playerY] is an available space
-cmp xPos, 14
+cmp xPos, 13
 je Invalid
 
 movzx eax, yPos
