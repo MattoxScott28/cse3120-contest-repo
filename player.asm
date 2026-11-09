@@ -69,16 +69,19 @@ je Invalid
 
 
 ; If the player is in bomb placing mode (esi = 1), jump to BombPlaceUp
-cmp esi, 0
-;jne BombPlaceUp
+cmp esi,1
+je BombPlaceUp
 
 ; If true, move player to PlayerX, PlayerY - 1
 sub yPos,1
-mov dl, 1 ; dl should be used to represent what is being put into the updated tile, 1 will represent a player
+mov dl, 50h ; dl should be used to represent what is being put into the updated tile, 50 will represent a player as 50 is the hex value for capital P
 ; call UpdateTile ( to my understanding, map[eax] is the tile that needs to be updated, I'm not sure if eax needs to be pushed for this to work or not )
 ret
 
 BombPlaceUp:
+mov dl, 42h ; dl should be used to represent what is being put into the updated tile, 42h will represent a bomb as 42h is the hex value for capital B
+; call UpdateTile, again uses eax, map[eax] should be the correct tile
+mov esi,2 ; 2 indicates the player is not in bomb placing mode, but there is a bomb placed currently
 
 ret
 
@@ -105,16 +108,18 @@ cmp dl, 'U'
 je Invalid
 
 ; If the player is in bomb placing mode (esi = 1), jump to BombPlaceLeft
-cmp esi,0
-;jne BombPlaceLeft
+cmp esi,1
+je BombPlaceLeft
 ; If true, move player to PlayerX-1, PlayerY
 sub xPos,1
-mov dl, 1 ; dl should be used to represent what is being put into the updated tile, 1 will represent a player
+mov dl, 50h ; dl should be used to represent what is being put into the updated tile, 50h will represent a player as 50h is the hex value for capital P
 ; call UpdateTile ( to my understanding, map[eax] is the tile that needs to be updated, I'm not sure if eax needs to be pushed for this to work or not )
 ret
 
 BombPlaceLeft:
-
+mov dl, 42h ; dl should be used to represent what is being put into the updated tile, 42h will represent a bomb as 42h is the hex value for capital B
+; call UpdateTile, again uses eax, map[eax] should be the correct tile
+mov esi,2 ; 2 indicates the player is not in bomb placing mode, but there is a bomb placed currently
 ret
 
 Down:
@@ -140,17 +145,19 @@ cmp dl, '#'
 je Invalid
 
 ; If the player is in bomb placing mode (esi = 1), jump to BombPlaceDown
-cmp esi,0
-;jne BombPlaceDown
+cmp esi,1
+je BombPlaceDown
 
 ; If true, move player to PlayerX, PlayerY + 1
 add yPos,1
-mov dl, 1 ; dl should be used to represent what is being put into the updated tile, 1 will represent a player
+mov dl, 50h ; dl should be used to represent what is being put into the updated tile, 50h will represent a player as 50h is the hex value for capital P
 ; call UpdateTile ( to my understanding, map[eax] is the tile that needs to be updated, I'm not sure if eax needs to be pushed for this to work or not )
 ret
 
 BombPlaceDown:
-
+mov dl, 42h ; dl should be used to represent what is being put into the updated tile, 42h will represent a bomb as 42h is the hex value for capital B
+; call UpdateTile, again uses eax, map[eax] should be the correct tile
+mov esi,2 ; 2 indicates the player is not in bomb placing mode, but there is a bomb placed currently
 ret
 
 Right:
@@ -177,22 +184,26 @@ cmp dl, '#'
 je Invalid
 
 ; If the player is in bomb placing mode (esi = 1), jump to BombPlaceRight
-cmp esi,0
-;jne BombPlaceRight
+cmp esi,1
+je BombPlaceRight
 
 ; If true, move player to PlayerX+1, PlayerY
 add xPos,1
-mov dl, 1 ; dl should be used to represent what is being put into the updated tile, 1 will represent a player
+mov dl, 50h ; dl should be used to represent what is being put into the updated tile, 50h will represent a player as 50h is the hex value for capital P
 ; call UpdateTile ( to my understanding, map[eax] is the tile that needs to be updated, I'm not sure if eax needs to be pushed for this to work or not )
 ret
 
 BombPlaceRight:
-
+mov dl, 42h ; dl should be used to represent what is being put into the updated tile, 42h will represent a bomb as 42h is the hex value for capital B
+; call UpdateTile, again uses eax, map[eax] should be the correct tile
+mov esi,2 ; 2 indicates the player is not in bomb placing mode, but there is a bomb placed currently
 ret
 
 Bomb:
 
-; Set esi to 1 to indicate bomb placement mode
+; If there is not a bomb placed (esi=2), Set esi to 1 to indicate bomb placement mode, otherwise jump to invalid
+cmp esi,2
+je Invalid
 mov esi, 1
 
 ; Read char, same as before but for bomb placement
