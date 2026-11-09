@@ -275,6 +275,22 @@ mov dl, 2Eh
 
 checkRight:
 
+movzx eax, yPos
+imul eax, MAP_WIDTH
+
+movzx ebx, xPos
+inc ebx
+
+add eax,ebx
+
+mov dl, map[eax]
+
+cmp dl, '0'
+jne checkLeft
+mov dl, 2Eh
+; UpdateTile to replace the block with an empty space
+
+checkLeft:
 
 
 ret
