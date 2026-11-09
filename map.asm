@@ -4,6 +4,8 @@ INCLUDE Bomberman.inc
 .data
 map BYTE (MAP_WIDTH * MAP_HEIGHT) DUP(?)
 
+EXTERN xPos : BYTE
+EXTERN yPos : BYTE
 
 rowS DWORD ?
 
@@ -178,6 +180,7 @@ DrawTile:
 	ret
 
 	DisplayMap ENDP
+
 
 END
 

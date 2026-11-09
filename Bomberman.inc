@@ -20,3 +20,4 @@ EXTERNDEF yPos : BYTE
 GenMap PROTO
 DisplayMap PROTO
 GetMove PROTO
+; UpdateTile PROTO

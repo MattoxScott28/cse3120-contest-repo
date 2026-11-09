@@ -57,7 +57,7 @@ imul eax, 15
 movzx ebx, xPos
 add eax,ebx
 
-; mov dl, map[eax] READD THIS LINE ONCE MAP HAS BEEN PUBLICLY DECLARED
+mov dl, map[eax] ; READD THIS LINE ONCE MAP HAS BEEN PUBLICLY DECLARED
 
 ; If the tile the player is trying to move to is a wall or breakable block, jump to Invalid
 cmp dl, 'X'
@@ -73,6 +73,8 @@ cmp esi, 0
 
 ; If true, move player to PlayerX, PlayerY - 1
 sub yPos,1
+mov dl, 1 ; dl should be used to represent what is being put into the updated tile, 1 will represent a player
+; call UpdateTile ( to my understanding, map[eax] is the tile that needs to be updated, I'm not sure if eax needs to be pushed for this to work or not )
 ret
 
 BombPlaceUp:
@@ -92,7 +94,7 @@ dec ebx
 
 add eax,ebx
 
-; mov dl, map[eax] READD THIS LINE ONCE MAP HAS BEEN PUBLICLY DECLARED
+mov dl, map[eax] ; READD THIS LINE ONCE MAP HAS BEEN PUBLICLY DECLARED
 
 ; If the tile the player is trying to move to is a wall or breakable block, jump to Invalid
 cmp dl, 'X'
@@ -106,6 +108,8 @@ cmp esi,0
 ;jne BombPlaceLeft
 ; If true, move player to PlayerX-1, PlayerY
 sub xPos,1
+mov dl, 1 ; dl should be used to represent what is being put into the updated tile, 1 will represent a player
+; call UpdateTile ( to my understanding, map[eax] is the tile that needs to be updated, I'm not sure if eax needs to be pushed for this to work or not )
 ret
 
 BombPlaceLeft:
@@ -125,7 +129,7 @@ imul eax, 15
 movzx ebx, xPos
 add eax,ebx
 
-; mov dl, map[eax] READD THIS LINE ONCE MAP HAS BEEN PUBLICLY DECLARED
+mov dl, map[eax] ; READD THIS LINE ONCE MAP HAS BEEN PUBLICLY DECLARED
 
 ; If the tile the player is trying to move to is a wall or breakable block, jump to Invalid
 cmp dl, '0'
@@ -140,6 +144,8 @@ cmp esi,0
 
 ; If true, move player to PlayerX, PlayerY + 1
 add yPos,1
+mov dl, 1 ; dl should be used to represent what is being put into the updated tile, 1 will represent a player
+; call UpdateTile ( to my understanding, map[eax] is the tile that needs to be updated, I'm not sure if eax needs to be pushed for this to work or not )
 ret
 
 BombPlaceDown:
@@ -159,7 +165,7 @@ inc ebx
 
 add eax,ebx
 
-; mov dl, map[eax] READD THIS LINE ONCE MAP HAS BEEN PUBLICLY DECLARED
+mov dl, map[eax] ; READD THIS LINE ONCE MAP HAS BEEN PUBLICLY DECLARED
 
 
 ; If the tile the player is trying to move to is a wall or breakable block, jump to Invalid
@@ -175,6 +181,8 @@ cmp esi,0
 
 ; If true, move player to PlayerX+1, PlayerY
 add xPos,1
+mov dl, 1 ; dl should be used to represent what is being put into the updated tile, 1 will represent a player
+; call UpdateTile ( to my understanding, map[eax] is the tile that needs to be updated, I'm not sure if eax needs to be pushed for this to work or not )
 ret
 
 BombPlaceRight:
