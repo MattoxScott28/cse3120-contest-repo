@@ -85,8 +85,10 @@ mov dl, 42h ; dl should be used to represent what is being put into the updated 
 ; call UpdateTile, again uses eax, map[eax] should be the correct tile
 
 ; Store position of the bomb for future reference
-mov bombX, xPos
-mov bombY, yPos
+mov al, xPos
+mov bombX, al
+mov al, yPos
+mov bombY, al
 dec bombY
 
 mov esi,2 ; 2 indicates the player is not in bomb placing mode, but there is a bomb placed currently
@@ -129,8 +131,10 @@ mov dl, 42h ; dl should be used to represent what is being put into the updated 
 ; call UpdateTile, again uses eax, map[eax] should be the correct tile
 
 ; Store bomb position for future reference
-mov bombX, xPos
-mov bombY, yPos
+mov al, xPos
+mov bombX, al
+mov al, yPos
+mov bombY, al
 dec bombX
 
 mov esi,2 ; 2 indicates the player is not in bomb placing mode, but there is a bomb placed currently
@@ -174,8 +178,10 @@ mov dl, 42h ; dl should be used to represent what is being put into the updated 
 ; call UpdateTile, again uses eax, map[eax] should be the correct tile
 
 ; Store bomb position for future reference
-mov bombX, xPos
-mov bombY, yPos
+mov al, xPos
+mov bombX, al
+mov al, yPos
+mov bombY, al
 inc bombY
 
 mov esi,2 ; 2 indicates the player is not in bomb placing mode, but there is a bomb placed currently
@@ -219,8 +225,10 @@ mov dl, 42h ; dl should be used to represent what is being put into the updated 
 ; call UpdateTile, again uses eax, map[eax] should be the correct tile
 
 ; Store bomb position for future reference
-mov bombX, xPos
-mov bombY, yPos
+mov al, xPos
+mov bombX, al
+mov al, yPos
+mov bombY, al
 inc bombX
 
 mov esi,2 ; 2 indicates the player is not in bomb placing mode, but there is a bomb placed currently
