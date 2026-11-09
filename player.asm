@@ -258,6 +258,8 @@ ret
 
 BombExplode:
 
+; Checks above a bomb for a breakable block, replaces it with an empty space if so
+checkUp:
 movzx eax, bombY
 dec eax
 
@@ -273,6 +275,7 @@ jne checkRight
 mov dl, 2Eh
 ; UpdateTile to replace the block with an empty space
 
+; Checks to the right of a bomb for a breakable block, replaces it with an empty space if so
 checkRight:
 
 movzx eax, bombY
@@ -290,6 +293,7 @@ jne checkLeft
 mov dl, 2Eh
 ; UpdateTile to replace the block with an empty space
 
+; Checks to the left of a bomb for a breakable block, replaces it with an empty space if so
 checkLeft:
 
 movzx eax, bombY
@@ -307,14 +311,15 @@ jne checkDown
 mov dl, 2Eh
 ; UpdateTile to replace the block with an empty space
 
+; Checks below a bomb for a breakable block, replaces it with an empty space if so
 checkDown:
 
-movzx eax, yPos
+movzx eax, bombY
 inc eax
 
 imul eax, 15
 
-movzx ebx, xPos
+movzx ebx, bombX
 add eax,ebx
 
 mov dl, map[eax]
@@ -324,7 +329,15 @@ jne removeBomb
 mov dl,2Eh
 ; UpdateTile to replace the block with an empty space
 
+; Replaces the bomb with an empty space
 removeBomb:
+movzx eax, bombY
+imul eax,15
+
+movzx ebx, bombX
+add eax,ebx
+mov dl,2Eh
+; UpdateTile to replace the bomb with an empty space
 
 ret
 
