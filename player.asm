@@ -3,6 +3,8 @@ INCLUDE Bomberman.inc
 
 .data
 myString3 BYTE "GetMove is working",0
+bombX BYTE 0
+bombY BYTE 0
 EXTERN xPos : BYTE
 EXTERN yPos : BYTE
 EXTERN map : BYTE
@@ -81,6 +83,12 @@ ret
 BombPlaceUp:
 mov dl, 42h ; dl should be used to represent what is being put into the updated tile, 42h will represent a bomb as 42h is the hex value for capital B
 ; call UpdateTile, again uses eax, map[eax] should be the correct tile
+
+; Store position of the bomb for future reference
+mov bombX, xPos
+mov bombY, yPos
+dec bombY
+
 mov esi,2 ; 2 indicates the player is not in bomb placing mode, but there is a bomb placed currently
 
 ret
@@ -119,7 +127,14 @@ ret
 BombPlaceLeft:
 mov dl, 42h ; dl should be used to represent what is being put into the updated tile, 42h will represent a bomb as 42h is the hex value for capital B
 ; call UpdateTile, again uses eax, map[eax] should be the correct tile
+
+; Store bomb position for future reference
+mov bombX, xPos
+mov bombY, yPos
+dec bombX
+
 mov esi,2 ; 2 indicates the player is not in bomb placing mode, but there is a bomb placed currently
+
 ret
 
 Down:
@@ -157,6 +172,12 @@ ret
 BombPlaceDown:
 mov dl, 42h ; dl should be used to represent what is being put into the updated tile, 42h will represent a bomb as 42h is the hex value for capital B
 ; call UpdateTile, again uses eax, map[eax] should be the correct tile
+
+; Store bomb position for future reference
+mov bombX, xPos
+mov bombY, yPos
+inc bombY
+
 mov esi,2 ; 2 indicates the player is not in bomb placing mode, but there is a bomb placed currently
 ret
 
@@ -196,7 +217,14 @@ ret
 BombPlaceRight:
 mov dl, 42h ; dl should be used to represent what is being put into the updated tile, 42h will represent a bomb as 42h is the hex value for capital B
 ; call UpdateTile, again uses eax, map[eax] should be the correct tile
+
+; Store bomb position for future reference
+mov bombX, xPos
+mov bombY, yPos
+inc bombX
+
 mov esi,2 ; 2 indicates the player is not in bomb placing mode, but there is a bomb placed currently
+
 ret
 
 Bomb:
@@ -227,6 +255,9 @@ je Right
 ; Does the same checks as up, down, left, right (we could possibly reuse the labels with some code rewriting?)
 ; Once the bomb is placed, I'm not sure whether we want it to be timed (if thats feasible) or if we want it to be reactive, once the player moves twice
 ret
+
+BombExplode:
+
 
 Invalid:
 ret
