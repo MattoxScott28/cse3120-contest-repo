@@ -258,6 +258,26 @@ ret
 
 BombExplode:
 
+movzx eax, bombY
+dec eax
+
+imul eax, 15
+
+movzx ebx, bombX
+add eax,ebx
+
+mov dl, map[eax]
+
+cmp dl, '0'
+jne checkRight
+mov dl, 2Eh
+; UpdateTile to replace the block with an empty space
+
+checkRight:
+
+
+
+ret
 
 Invalid:
 ret
