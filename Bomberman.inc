@@ -16,6 +16,8 @@ PLAYER EQU 'P'
 EXTERNDEF xPos : BYTE
 EXTERNDEF yPos : BYTE
 
+EXTERNDEF map : BYTE
+
 ;procedure protos
 GenMap PROTO
 DisplayMap PROTO

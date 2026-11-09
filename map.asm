@@ -2,7 +2,8 @@ INCLUDE Irvine32.inc
 INCLUDE Bomberman.inc
 
 .data
-map BYTE (MAP_WIDTH * MAP_HEIGHT) DUP(?)
+
+EXTERN map : BYTE
 
 EXTERN xPos : BYTE
 EXTERN yPos : BYTE
