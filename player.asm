@@ -309,6 +309,22 @@ mov dl, 2Eh
 
 checkDown:
 
+movzx eax, yPos
+inc eax
+
+imul eax, 15
+
+movzx ebx, xPos
+add eax,ebx
+
+mov dl, map[eax]
+
+cmp dl,'0'
+jne removeBomb
+mov dl,2Eh
+; UpdateTile to replace the block with an empty space
+
+removeBomb:
 
 ret
 
