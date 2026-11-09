@@ -128,10 +128,10 @@ add eax,ebx
 ; mov dl, map[eax] READD THIS LINE ONCE MAP HAS BEEN PUBLICLY DECLARED
 
 ; If the tile the player is trying to move to is a wall or breakable block, jump to Invalid
-cmp dl, 'X'
+cmp dl, '0'
 je Invalid
 
-cmp dl, 'U'
+cmp dl, '#'
 je Invalid
 
 ; If the player is in bomb placing mode (esi = 1), jump to BombPlaceDown
@@ -163,10 +163,10 @@ add eax,ebx
 
 
 ; If the tile the player is trying to move to is a wall or breakable block, jump to Invalid
-cmp dl, 'X'
+cmp dl, '0'
 je Invalid
 
-cmp dl, 'U'
+cmp dl, '#'
 je Invalid
 
 ; If the player is in bomb placing mode (esi = 1), jump to BombPlaceRight
