@@ -596,4 +596,9 @@ TurnOver:
 
 ProcessTurn ENDP
 
+ExplodeTile PROC, blastX:DWORD, blastY:DWORD
+	
+
+ExplodeTile ENDP
+
 END
