@@ -22,4 +22,4 @@ EXTERNDEF map : BYTE
 GenMap PROTO
 DisplayMap PROTO
 GetMove PROTO
-UpdateTile PROTO
+UpdateTile PROTO, tileIndex:DWORD, newTile:DWORD
