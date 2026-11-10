@@ -41,9 +41,10 @@ The project requires:
 
 1. Clone or download the project repository from GitHub.
 2. Open the Visual Studio solution (`.sln`) file.
-3. Build Solution
-4. Pray that the solution is built
-5. Have fun!
+3. Build Solution.
+4. If building the solution doesn't work, make sure you exclude any files that are not .asm or .inc (but only after trying to build).
+5. Pray that the solution is built.
+6. Have fun!
    
 ## Contributors
 
