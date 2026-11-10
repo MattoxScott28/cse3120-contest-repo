@@ -229,7 +229,7 @@ ret
 
 Right:
 ; Check if map[playerX+1][playerY] is an available space
-cmp xPos, 13
+cmp xPos, MAP_WIDTH-2
 je Invalid
 
 movzx eax, yPos
@@ -237,17 +237,19 @@ imul eax, MAP_WIDTH
 
 movzx ebx, xPos
 inc ebx
-
 add eax,ebx
 
 mov dl, map[eax] ; READD THIS LINE ONCE MAP HAS BEEN PUBLICLY DECLARED
 
 
 ; If the tile the player is trying to move to is a wall or breakable block, jump to Invalid
-cmp dl, '0'
+cmp dl, WALL
 je Invalid
 
-cmp dl, '#'
+cmp dl, BLOCK
+je Invalid
+
+cmp dl, 'B'
 je Invalid
 
 ; If the player is in bomb placing mode (esi = 1), jump to BombPlaceRight
