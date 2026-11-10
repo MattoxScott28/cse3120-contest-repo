@@ -49,11 +49,12 @@ main PROC
      mov xPos, 1
      mov yPos, 1
     game:
-     call clrscr
      call DisplayMap
      call GetMove
+
      cmp finish,1
      je gameEnd
+
      jmp game
 gameEnd:
 exit
