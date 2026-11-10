@@ -8,6 +8,8 @@ MAP_HEIGHT EQU 13
 ; Characters translating to tiles
 WALL EQU '#'
 BLOCK EQU '0'
+SPECIAL_BLOCK EQU 'S'
+EXIT_AREA EQU 'X'
 EMPTY EQU '.'
 PLAYER EQU 'P'
 
