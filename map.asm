@@ -241,7 +241,7 @@ DrawTile:
 	jmp TileDraw
 
 	TileBomb:
-	mov eax, 00h
+	mov eax, 0Ch
 	jmp TileDraw
 
 	TileDraw:
