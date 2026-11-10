@@ -228,7 +228,9 @@ DrawTile:
 
 	jmp TileDraw
 
-
+	TileWall:
+	mov eax, 07h
+	jmp TileDraw
 
 	ret 
 
