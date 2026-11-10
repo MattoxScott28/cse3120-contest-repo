@@ -210,10 +210,6 @@ MapC:
 	je DrawPlayer
 
 
-	cmp dl, SPECIAL_BLOCK
-	je DrawSpecialBlock
-
-
 	; Floor/empty space
 	; https://kommodo.ai/i/6PSgOykpkPL3MA4wKhxv
 	; This link is safe I promise
@@ -238,13 +234,6 @@ DrawPlayer:
 
 
 	mov eax, 0Ah
-	jmp DrawTile
-
-
-DrawSpecialBlock:
-
-
-	mov eax, 0Dh
 	jmp DrawTile
 
 
@@ -349,10 +338,6 @@ DrawSingleTile PROC, tileX:DWORD, tileY:DWORD, tileChar:DWORD
 	je TileBomb
 
 
-	cmp tileChar, SPECIAL_BLOCK
-	je TileSpecialBlock
-
-
 	jmp TileDraw
 
 
@@ -381,13 +366,6 @@ TileBomb:
 
 
 	mov eax, 0Ch
-	jmp TileDraw
-
-
-TileSpecialBlock:
-
-
-	mov eax, 0Dh
 	jmp TileDraw
 
 
