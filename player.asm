@@ -365,23 +365,23 @@ ret
 ; Checks to the right of a bomb for a breakable block, replaces it with an empty space if so
 ;checkRight:
 
-movzx eax, bombY
-imul eax, MAP_WIDTH
+;movzx eax, bombY
+;imul eax, MAP_WIDTH
 
-movzx ebx, bombX
-inc ebx
+;movzx ebx, bombX
+;inc ebx
 
-add eax,ebx
+;add eax,ebx
 
-mov dl, map[eax]
+;mov dl, map[eax]
 
-cmp dl, '0'
-jne checkLeft
-mov dl, 2Eh
+;cmp dl, '0'
+;jne checkLeft
+;mov dl, 2Eh
 ; UpdateTile to replace the block with an empty space
 
 ; Checks to the left of a bomb for a breakable block, replaces it with an empty space if so
-checkLeft:
+;checkLeft:
 
 movzx eax, bombY
 imul eax, 15
