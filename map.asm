@@ -197,6 +197,12 @@ DrawTile:
 
 	UpdateTile ENDP
 
+	PUBLIC DrawTile
 
+	DrawTile PROC, tileX:DWORD, tileY:DWORD, tileChar:DWORD
+
+	ret 
+
+	DrawTile ENDP
 END
 
