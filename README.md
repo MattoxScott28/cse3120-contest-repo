@@ -21,10 +21,10 @@ This project is a Bomberman-inspired game developed using **x86 Assembly (MASM)*
 ## How to Play
 
 1. Start a new game to generate a random map.
-2. Navigate through the map using the movement controls.
+2. Navigate through the map using WASD and your helpful BOMBS.
 3. Place bombs next to destructible blocks to clear paths.
 4. Bombs explode after two successful movements.
-5. Find and destroy the special block to reveal the hidden exit.
+5. Find and destroy the secret block to reveal the hidden exit.
 6. Move onto the exit to complete the level.
 7. Avoid getting caught in an explosion, or the game will end.
 
