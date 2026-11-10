@@ -474,6 +474,8 @@ Invalid:
 mov al, 0
 ret
 
+GetMove ENDP
+
 PlaceBomb PROC
 	
 	cmp activeBomb, 1
@@ -556,16 +558,18 @@ CheckBomb:
 
 	INVOKE UpdateTile, eax, 'B'
 
-Dud:
-
-
 	mov activeBomb, 1
 	mov bombTurns, 2
 
 	mov al, 2
 	ret
 
+Dud:
+	
+	mov al, 0
+	ret
+
 PlaceBomb ENDP
 
-GetMove ENDP
+
 END
