@@ -50,17 +50,6 @@ StartGame:
     call DisplayMap
 
    
-StartScreen:
-    
-    call ReadChar
-    and AL, 0DFh
-
-    cmp al,'W'
-    je Begin
-
-    jmp StartScreen
-     
-     
 ; Begin the game
 Begin:
     
@@ -89,6 +78,7 @@ Game:
     call ProcessTurn
 
 CheckFinish:
+
 
     ; Checks whether player lost or beat the game
     cmp finish, 1
@@ -121,6 +111,20 @@ Victory:
 
 
 GameEnd:
+
+
+    call Clrscr
+
+    mov dh, 12
+    mov dl, 55
+    call GoToXY
+
+    
+    mov edx, OFFSET gameOverMessage
+    call WriteString
+
+
+    jmp EndScreen
 
 
 ExitGame:
