@@ -12,8 +12,10 @@ PUBLIC finish
 startMessage BYTE "Press W to begin",0
 
 
-; Victory message
+; End game messages
+gameOverMessage BYTE "GAME OVER!", 0
 victoryMessage BYTE "Level Complete!",0
+restartMessage BYTE "Press R to restart or Q to quit",0
 
 ; Variables we will use to keep track of the player
 xPos BYTE 0
