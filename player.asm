@@ -94,7 +94,7 @@ ret
 
 ; If the player is in bomb placing mode (esi = 1), jump to BombPlaceUp
 ;cmp esi,1
-je BombPlaceUp
+;je BombPlaceUp
 
 ; If true, move player to PlayerX, PlayerY - 1
 ;sub yPos,1
