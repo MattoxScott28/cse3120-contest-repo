@@ -1,21 +1,23 @@
 .386
 
-;BOARD DIMENSIONS
+;Board dimensions - will most likely change to a larger map size
 
 MAP_WIDTH EQU 15is 
 MAP_HEIGHT EQU 13
 
+; Characters translating to tiles
 WALL EQU '#'
 BLOCK EQU '0'
 EMPTY EQU '.'
 PLAYER EQU 'P'
 
-
+; Shared variables
 EXTERNDEF xPos : BYTE
 EXTERNDEF yPos : BYTE
 EXTERNDEF map : BYTE
 EXTERNDEF finish : BYTE
 
+; Procedures used by multiple files
 GenMap PROTO
 DisplayMap PROTO
 GetMove PROTO

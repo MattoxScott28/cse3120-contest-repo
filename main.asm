@@ -1,5 +1,5 @@
-INCLUDE Irvine32.inc ; This one probably declares the model?
-                     ; If we declare it in bomberman.inc we should be all good, gonna keep it here for now just because redundancy
+INCLUDE Irvine32.inc 
+                     
 INCLUDE Bomberman.inc 
 
 .stack 4096
