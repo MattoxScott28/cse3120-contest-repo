@@ -6,6 +6,11 @@ INCLUDE Bomberman.inc
 ; Stores the starting address of the curr row while drawing map
 rowS DWORD ?
 
+
+; Stores the randomly selected special block pos
+specialX DWORD ?
+specialY DWORD ?
+
 ; Access shared variables from main
 EXTERN map : BYTE
 EXTERN xPos : BYTE
