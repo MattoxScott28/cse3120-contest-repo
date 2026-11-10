@@ -1,685 +1,688 @@
 INCLUDE Irvine32.inc
 INCLUDE Bomberman.inc
 
+
 .data
-myString3 BYTE "GetMove is working",0
+
+
+; Stores the pos and countdown of the curr bomb
 bombX BYTE 0
 bombY BYTE 0
 activeBomb BYTE 0
 bombTurns BYTE 0
-EXTERN xPos : BYTE
-EXTERN yPos : BYTE
-EXTERN map : BYTE
-EXTERN finish : BYTE
+
 
 .code
+
+
 PUBLIC GetMove
+PUBLIC ProcessTurn
 
+
+; Reads player input and handles both movement and bomb placement
 GetMove PROC
-  call ReadChar
 
-  and AL, 0DFh
+
+	; Reads a key (shocker)
+	call ReadChar
+	and AL, 0DFh
   
-  ; Compare the key input with the W key and the Up arrow, if equal the character moves upward
-  cmp al, 'W'
-  je Up
-  cmp ah, 48h
-  je Up
 
-  ; Compare the key input with the A key and Left arrow, if equal the character moves left
-  cmp al, 'A'
-  je Left
-  cmp ah, 4Bh
-  je Left
 
-  ; Compare the key input with the S key and Down arrow, if equal, the character moves down
-  cmp al, 'S'
-  je Down
-  cmp ah, 50h
-  je Down
+	; Check for upward movement, if key = 'W' then you go up
+	cmp al, 'W'
+	je Up
+	cmp ah, 48h
+	je Up
 
-  ; Compare the key input with the D key and Right arrow, if equal, the character moves right
-  cmp al, 'D'
-  je Right
-  cmp ah,4Dh
-  je Right
-  
-  cmp al, 'E'
-  je Bomberman
+	; Check for left movement
+	cmp al, 'A'
+	je Left
+	cmp ah, 4Bh
+	je Left
 
-  ;mov al, 0
-  ;ret
+	; Check for down movement
+	cmp al, 'S'
+	je Down
+	cmp ah, 50h
+	je Down
 
-  jmp Invalid
+	; Compare the key input with the D key and Right arrow, if equal, the character moves right
+	cmp al, 'D'
+	je Right
+	cmp ah,4Dh
+	je Right
+	
+
+	; Checks if the player wants to enter bomb placing mode
+	cmp al, 'E'
+	je Bomberman
+
+
+	; If all else fails
+	jmp Invalid
+
 
 Up:
 
-; Check if map[playerX][playerY-1] is an available space
-cmp yPos, 1
-je Invalid
 
-movzx eax, yPos
-dec eax
-imul eax, MAP_WIDTH
-
-movzx ebx, xPos
-add eax,ebx
-
-mov dl, map[eax] ; READD THIS LINE ONCE MAP HAS BEEN PUBLICLY DECLARED
-
-; If the tile the player is trying to move to is a wall or breakable block, jump to Invalid
-cmp dl, WALL
-je Invalid
-
-cmp dl, BLOCK
-je Invalid
-
-cmp dl, 'B'
-je Invalid
-
-movzx eax, yPos
-imul eax, MAP_WIDTH
-movzx ebx, xPos
-add eax, ebx
-
-INVOKE UpdateTile, eax, EMPTY
-
-movzx eax, xPos
-movzx ebx, yPos
-INVOKE DrawSingleTile, eax, ebx, EMPTY
-
-dec yPos
-
-movzx eax, yPos
-imul eax, MAP_WIDTH
-movzx ebx, xPos
-add eax, ebx
-
-INVOKE UpdateTile, eax, PLAYER
-
-movzx eax, xPos
-movzx ebx, yPos
-INVOKE DrawSingleTile, eax, ebx, PLAYER
-
-mov al, 1
-ret
+	; Check if map[playerX][playerY-1] is an available space
+	cmp yPos, 1
+	je Invalid
 
 
-; If the player is in bomb placing mode (esi = 1), jump to BombPlaceUp
-;cmp esi,1
-;je BombPlaceUp
+	; Calculates the map index of the desination tile
+	movzx eax, yPos
+	dec eax
+	imul eax, MAP_WIDTH
 
-; If true, move player to PlayerX, PlayerY - 1
-;sub yPos,1
-;mov dl, 50h ; dl should be used to represent what is being put into the updated tile, 50 will represent a player as 50 is the hex value for capital P
-; call UpdateTile ( to my understanding, map[eax] is the tile that needs to be updated, I'm not sure if eax needs to be pushed for this to work or not )
-;ret
 
-;BombPlaceUp:
-;mov dl, 42h ; dl should be used to represent what is being put into the updated tile, 42h will represent a bomb as 42h is the hex value for capital B
-; call UpdateTile, again uses eax, map[eax] should be the correct tile
+	movzx ebx, xPos
+	add eax,ebx
 
-; Store position of the bomb for future reference
-;mov al, xPos
-;mov bombX, al
-;mov al, yPos
-;mov bombY, al
-;dec bombY
 
-;mov esi,2 ; 2 indicates the player is not in bomb placing mode, but there is a bomb placed currently
+	; Checks if desination tile is available
+	mov dl, map[eax] 
 
-;ret
+
+	; If the tile the player is trying to move to is a wall, block, or bomb, jump to Invalid
+	cmp dl, WALL
+	je Invalid
+
+
+	cmp dl, BLOCK
+	je Invalid
+
+
+	cmp dl, 'B'
+	je Invalid
+
+
+	; Clears the player's prev pos
+	movzx eax, yPos
+	imul eax, MAP_WIDTH
+	movzx ebx, xPos
+	add eax, ebx
+
+
+	INVOKE UpdateTile, eax, EMPTY
+
+
+	movzx eax, xPos
+	movzx ebx, yPos
+	INVOKE DrawSingleTile, eax, ebx, EMPTY
+
+
+	; Updates player position
+	dec yPos
+
+	; Places player at the new pos
+	movzx eax, yPos
+	imul eax, MAP_WIDTH
+	movzx ebx, xPos
+	add eax, ebx
+	
+
+	INVOKE UpdateTile, eax, PLAYER
+
+
+	movzx eax, xPos
+	movzx ebx, yPos
+	INVOKE DrawSingleTile, eax, ebx, PLAYER
+
+
+	mov al, 1
+
+
+	ret
+
 
 Left:
-; Check if map[playerX-1][playerY] is an available space
-cmp xPos, 1
-je Invalid
 
-movzx eax, yPos
-imul eax, MAP_WIDTH
 
-movzx ebx, xPos
-dec ebx
-add eax,ebx
+	; Check if map[playerX-1][playerY] is an available space
+	cmp xPos, 1
+	je Invalid
 
-mov dl, map[eax] ; READD THIS LINE ONCE MAP HAS BEEN PUBLICLY DECLARED
 
-; If the tile the player is trying to move to is a wall or breakable block, jump to Invalid
-cmp dl, WALL
-je Invalid
+	; Calculates the map index of the destination tile
+	movzx eax, yPos
+	imul eax, MAP_WIDTH
 
-cmp dl, BLOCK
-je Invalid
 
-cmp dl, 'B'
-je Invalid
+	movzx ebx, xPos
+	dec ebx
+	add eax,ebx
 
-; remove from old position
-movzx eax, yPos
-imul eax, MAP_WIDTH
-movzx ebx, xPos
-add eax, ebx
 
-INVOKE UpdateTile, eax, EMPTY
+	; Checks whether the desination tile is available
+	mov dl, map[eax] ; READD THIS LINE ONCE MAP HAS BEEN PUBLICLY DECLARED
 
-movzx eax, xPos
-movzx ebx, yPos
-INVOKE DrawSingleTile, eax, ebx, EMPTY
 
-dec xPos
+	cmp dl, WALL
+	je Invalid
 
-movzx eax, yPos
-imul eax, MAP_WIDTH
-movzx ebx, xPos
-add eax, ebx
 
-INVOKE UpdateTile, eax, PLAYER
+	cmp dl, BLOCK
+	je Invalid
 
-movzx eax, xPos
-movzx ebx, yPos
-INVOKE DrawSingleTile, eax, ebx, PLAYER
 
-mov al, 1
-ret
+	cmp dl, 'B'
+	je Invalid
 
-; If the player is in bomb placing mode (esi = 1), jump to BombPlaceLeft
-;cmp esi,1
-;je BombPlaceLeft
-; If true, move player to PlayerX-1, PlayerY
-;sub xPos,1
-;mov dl, 50h ; dl should be used to represent what is being put into the updated tile, 50h will represent a player as 50h is the hex value for capital P
-; call UpdateTile ( to my understanding, map[eax] is the tile that needs to be updated, I'm not sure if eax needs to be pushed for this to work or not )
 
-;BombPlaceLeft:
-;mov dl, 42h ; dl should be used to represent what is being put into the updated tile, 42h will represent a bomb as 42h is the hex value for capital B
-; call UpdateTile, again uses eax, map[eax] should be the correct tile
+	; remove from old position
+	movzx eax, yPos
+	imul eax, MAP_WIDTH
+	movzx ebx, xPos
+	add eax, ebx
 
-; Store bomb position for future reference
-;mov al, xPos
-;mov bombX, al
-;mov al, yPos
-;mov bombY, al
-;dec bombX
 
-;mov esi,2 ; 2 indicates the player is not in bomb placing mode, but there is a bomb placed currently
+	INVOKE UpdateTile, eax, EMPTY
 
+
+	movzx eax, xPos
+	movzx ebx, yPos
+	INVOKE DrawSingleTile, eax, ebx, EMPTY
+
+
+	; Updates the player's position
+	dec xPos
+
+
+	; Places the player at the new pos
+	movzx eax, yPos
+	imul eax, MAP_WIDTH
+	movzx ebx, xPos
+	add eax, ebx
+
+
+	INVOKE UpdateTile, eax, PLAYER
+
+
+	movzx eax, xPos
+	movzx ebx, yPos
+	INVOKE DrawSingleTile, eax, ebx, PLAYER
+
+	mov al, 1
+
+
+	ret
+
+; The code for Down and Right are literally the same as Up and Down except for some specific increments/decrements
 Down:
-; Check if map[playerX][playerY+1] is an available space
-cmp yPos, MAP_HEIGHT-2
-je Invalid
 
-movzx eax, yPos
-inc eax
-imul eax, MAP_WIDTH
 
-movzx ebx, xPos
-add eax,ebx
-mov dl, map[eax] ; READD THIS LINE ONCE MAP HAS BEEN PUBLICLY DECLARED
+	; Check if map[playerX][playerY+1] is an available space
+	cmp yPos, MAP_HEIGHT-2
+	je Invalid
 
-; If the tile the player is trying to move to is a wall or breakable block, jump to Invalid
-cmp dl, WALL
-je Invalid
 
-cmp dl, BLOCK
-je Invalid
+	movzx eax, yPos
+	inc eax
+	imul eax, MAP_WIDTH
 
-cmp dl, 'B'
-je Invalid
 
-movzx eax, yPos
-imul eax, MAP_WIDTH
-movzx ebx, xPos
-add eax, ebx
+	movzx ebx, xPos
+	add eax,ebx
+	mov dl, map[eax] ; READD THIS LINE ONCE MAP HAS BEEN PUBLICLY DECLARED
 
-INVOKE UpdateTile, eax, EMPTY
 
-movzx eax, xPos
-movzx ebx, yPos
-INVOKE DrawSingleTile, eax, ebx, EMPTY
+	; If the tile the player is trying to move to is a wall or breakable block, jump to Invalid
+	cmp dl, WALL
+	je Invalid
+	
 
-inc yPos
+	cmp dl, BLOCK
+	je Invalid
 
-movzx eax, yPos
-imul eax, MAP_WIDTH
-movzx ebx, xPos
-add eax, ebx
 
-INVOKE UpdateTile, eax, PLAYER
+	cmp dl, 'B'
+	je Invalid
 
-movzx eax, xPos
-movzx ebx, yPos
-INVOKE DrawSingleTile, eax, ebx, PLAYER
 
-mov al, 1
-ret
+	movzx eax, yPos
+	imul eax, MAP_WIDTH
+	movzx ebx, xPos
+	add eax, ebx
 
-; If the player is in bomb placing mode (esi = 1), jump to BombPlaceDown
-;cmp esi,1
-;je BombPlaceDown
 
-; If true, move player to PlayerX, PlayerY + 1
-;add yPos,1
-;mov dl, 50h ; dl should be used to represent what is being put into the updated tile, 50h will represent a player as 50h is the hex value for capital P
-; call UpdateTile ( to my understanding, map[eax] is the tile that needs to be updated, I'm not sure if eax needs to be pushed for this to work or not )
-;ret
+	INVOKE UpdateTile, eax, EMPTY
 
-;BombPlaceDown:
-;mov dl, 42h ; dl should be used to represent what is being put into the updated tile, 42h will represent a bomb as 42h is the hex value for capital B
-; call UpdateTile, again uses eax, map[eax] should be the correct tile
 
-; Store bomb position for future reference
-;mov al, xPos
-;mov bombX, al
-;mov al, yPos
-;mov bombY, al
-;inc bombY
+	movzx eax, xPos
+	movzx ebx, yPos
+	INVOKE DrawSingleTile, eax, ebx, EMPTY
 
-;mov esi,2 ; 2 indicates the player is not in bomb placing mode, but there is a bomb placed currently
-ret
+
+	inc yPos
+
+
+	movzx eax, yPos
+	imul eax, MAP_WIDTH
+	movzx ebx, xPos
+	add eax, ebx
+	
+
+	INVOKE UpdateTile, eax, PLAYER
+
+
+	movzx eax, xPos
+	movzx ebx, yPos
+	INVOKE DrawSingleTile, eax, ebx, PLAYER
+
+
+	mov al, 1
+
+
+	ret
+
 
 Right:
-; Check if map[playerX+1][playerY] is an available space
-cmp xPos, MAP_WIDTH-2
-je Invalid
-
-movzx eax, yPos
-imul eax, MAP_WIDTH
-
-movzx ebx, xPos
-inc ebx
-add eax,ebx
-
-mov dl, map[eax] ; READD THIS LINE ONCE MAP HAS BEEN PUBLICLY DECLARED
 
 
-; If the tile the player is trying to move to is a wall or breakable block, jump to Invalid
-cmp dl, WALL
-je Invalid
-
-cmp dl, BLOCK
-je Invalid
-
-cmp dl, 'B'
-je Invalid
-
-movzx eax, yPos
-imul eax, MAP_WIDTH
-movzx ebx, xPos
-add eax, ebx
-
-INVOKE UpdateTile, eax, EMPTY
-
-movzx eax, xPos
-movzx ebx, yPos
-INVOKE DrawSingleTile, eax, ebx, EMPTY
-
-inc xPos
-
-movzx eax, yPos
-imul eax, MAP_WIDTH
-movzx ebx, xPos
-add eax, ebx
-
-INVOKE UpdateTIle, eax, PLAYER
-
-movzx eax, xPos
-movzx ebx, yPos
-INVOKE DrawSingleTile, eax, ebx, PLAYER
-
-mov al, 1
-ret
-
-; If the player is in bomb placing mode (esi = 1), jump to BombPlaceRight
-;cmp esi,1
-;je BombPlaceRight
-
-; If true, move player to PlayerX+1, PlayerY
-;add xPos,1
-;mov dl, 50h ; dl should be used to represent what is being put into the updated tile, 50h will represent a player as 50h is the hex value for capital P
-; call UpdateTile ( to my understanding, map[eax] is the tile that needs to be updated, I'm not sure if eax needs to be pushed for this to work or not )
-;ret
-
-;BombPlaceRight:
-;mov dl, 42h ; dl should be used to represent what is being put into the updated tile, 42h will represent a bomb as 42h is the hex value for capital B
-; call UpdateTile, again uses eax, map[eax] should be the correct tile
-
-; Store bomb position for future reference
-;mov al, xPos
-;mov bombX, al
-;mov al, yPos
-;mov bombY, al
-;inc bombX
-
-;mov esi,2 ; 2 indicates the player is not in bomb placing mode, but there is a bomb placed currently
-
-;ret
-
-;Bomb:
-
-; If there is not a bomb placed (esi=2), Set esi to 1 to indicate bomb placement mode, otherwise jump to invalid
-;cmp esi,2
-;je Invalid
-;mov esi, 1
-
-; Read char, same as before but for bomb placement
-;call ReadChar
-;and AL, 0DFh
-
-;cmp al, 'W'
-;je Up
-
-;cmp al, 'A'
-;je Left
-
-;cmp al, 'S'
-;je Down
-
-;cmp al, 'D'
-;je Right
+	; Check if map[playerX+1][playerY] is an available space
+	cmp xPos, MAP_WIDTH-2
+	je Invalid
 
 
-; Once again reads char for wasd or arrow key, the player can place the bomb in any of their cardinal directions
-; Does the same checks as up, down, left, right (we could possibly reuse the labels with some code rewriting?)
-; Once the bomb is placed, I'm not sure whether we want it to be timed (if thats feasible) or if we want it to be reactive, once the player moves twice
-;ret
+	movzx eax, yPos
+	imul eax, MAP_WIDTH
 
-;BombExplode:
 
-; Checks above a bomb for a breakable block, replaces it with an empty space if so
-;checkUp:
-;movzx eax, bombY
-;dec eax
+	movzx ebx, xPos
+	inc ebx
+	add eax,ebx
 
-;imul eax, 15
 
-;movzx ebx, bombX
-;add eax,ebx
+	mov dl, map[eax] ; READD THIS LINE ONCE MAP HAS BEEN PUBLICLY DECLARED
 
-;mov dl, map[eax]
 
-;cmp dl, '0'
-;jne checkRight
-;mov dl, 2Eh
-; UpdateTile to replace the block with an empty space
+	; If the tile the player is trying to move to is a wall or breakable block, jump to Invalid
+	cmp dl, WALL
+	je Invalid
 
-; Checks to the right of a bomb for a breakable block, replaces it with an empty space if so
-;checkRight:
 
-;movzx eax, bombY
-;imul eax, MAP_WIDTH
+	cmp dl, BLOCK
+	je Invalid
 
-;movzx ebx, bombX
-;inc ebx
 
-;add eax,ebx
+	cmp dl, 'B'
+	je Invalid
 
-;mov dl, map[eax]
 
-;cmp dl, '0'
-;jne checkLeft
-;mov dl, 2Eh
-; UpdateTile to replace the block with an empty space
+	movzx eax, yPos
+	imul eax, MAP_WIDTH
+	movzx ebx, xPos
+	add eax, ebx
 
-; Checks to the left of a bomb for a breakable block, replaces it with an empty space if so
-;checkLeft:
 
-;movzx eax, bombY
-;imul eax, 15
+	INVOKE UpdateTile, eax, EMPTY
 
-;movzx ebx, bombX
-;dec ebx
 
-;add eax,ebx
+	movzx eax, xPos
+	movzx ebx, yPos
+	INVOKE DrawSingleTile, eax, ebx, EMPTY
 
-;mov dl, map[eax]
 
-;cmp dl,'0'
-;jne checkDown
-;mov dl, 2Eh
-; UpdateTile to replace the block with an empty space
+	inc xPos
 
-; Checks below a bomb for a breakable block, replaces it with an empty space if so
-;checkDown:
 
-;movzx eax, bombY
-;inc eax
+	movzx eax, yPos
+	imul eax, MAP_WIDTH
+	movzx ebx, xPos
+	add eax, ebx
 
-;imul eax, 15
 
-;movzx ebx, bombX
-;add eax,ebx
+	INVOKE UpdateTIle, eax, PLAYER
 
-;mov dl, map[eax]
 
-;cmp dl,'0'
-;jne removeBomb
-;mov dl,2Eh
-; UpdateTile to replace the block with an empty space
+	movzx eax, xPos
+	movzx ebx, yPos
+	INVOKE DrawSingleTile, eax, ebx, PLAYER
 
-; Replaces the bomb with an empty space
-;removeBomb:
-;movzx eax, bombY
-;imul eax,15
 
-;movzx ebx, bombX
-;add eax,ebx
-;mov dl,2Eh
-; UpdateTile to replace the bomb with an empty space
+	mov al, 1
 
-;ret
+
+	ret
+
 
 Bomberman:
+
+	; Handles bomb placement
 	call PlaceBomb
 	ret
 
+
 Invalid:
-mov al, 0
-ret
+
+
+	; Return 0 when player performs an invalid action
+	mov al, 0
+
+
+	ret
+
 
 GetMove ENDP
 
+
+; Places a bomb in the direction selected by the player
 PlaceBomb PROC
 	
+	
+	; Only allow 1 bomb at a time
 	cmp activeBomb, 1
 	je Dud
 
+	
+	; Reads the direction of the bomb placement
 	call ReadChar
 	and AL, 0DFh
 
+
+	; Start with the player's curr pos
 	movzx ebx, xPos
 	movzx edx, yPos
 
+
+	; Determines bomb destination
 	cmp al, 'W'
 	je PlaceBombUp
 	cmp ah, 48h
 	je PlaceBombUp
+
 
 	cmp al, 'A'
 	je PlaceBombLeft
 	cmp Ah, 4Bh
 	je PlaceBombLeft
 
+
 	cmp al, 'S'
 	je PlaceBombDown
 	cmp ah, 50h
 	je PlaceBombDown
+
 
 	cmp al, 'D'
 	je PlaceBombRight
 	cmp ah, 4Dh
 	je PlaceBombRight
 
+
 	jmp Dud
+
 
 PlaceBombUp:
 	
+
 	dec edx
 	jmp CheckBomb
 
+
 PlaceBombDown:
+
 
 	inc edx
 	jmp CheckBomb
 
+
 PlaceBombLeft:
+
 
 	dec ebx
 	jmp CheckBomb
 
+
 PlaceBombRight:
+
 
 	inc ebx
 	jmp CheckBomb
 
+
+
 CheckBomb:
 	
+	; Ensures bomb is inside the playable area of the map
 	cmp ebx, 1
 	jl Dud
 	cmp ebx, MAP_WIDTH-2
 	jg Dud
+
 
 	cmp edx, 1
 	jl Dud
 	cmp edx, MAP_HEIGHT-2
 	jg Dud
 
+
+	; Calculates the destination of the map index
 	mov eax, edx
 	imul eax, MAP_WIDTH
 	add eax, ebx
 
+
+	; Only allows bombs on empty spaces
 	cmp BYTE PTR map[eax], EMPTY
 	jne Dud
 	
+
+	; Stores bomb pos
 	mov bombX, bl
 	mov bombY, dl
 
+
+	; Places the bomb in the map
 	movzx eax, bombY
 	imul eax, MAP_WIDTH
 	movzx ebx, bombX
 	add eax, ebx
 
+
 	INVOKE UpdateTile, eax, 'B'
 
+
+	; Displays the bomb
 	movzx eax, bombX
 	movzx ebx, bombY
 
+
 	INVOKE DrawSingleTile, eax, ebx, 'B'
 
+
+	; Activates the bomb and initializes the countdown
 	mov activeBomb, 1
 	mov bombTurns, 2
 
+
+	; Returns a code of 2 to indicate the placement of a bomb
 	mov al, 2
+
+
 	ret
+
 
 Dud:
 	
+
+	;Return 0 if bomb placement fails
 	mov al, 0
+
+
 	ret
+
 
 PlaceBomb ENDP
 
+
+; Decreases the bomb countdown after each successful turn/movement
 ProcessTurn PROC
 	
+
 	cmp activeBomb, 1
 	jne TurnOver
 
+
 	dec bombTurns
+
 
 	cmp bombTurns, 0
 	jne TurnOver
 
+
 	call Explode
+
 
 TurnOver:
 
+
 	ret
+
 
 ProcessTurn ENDP
 
+
+; Checks if an adjacent tile of the bomb is affected by an explosion
 ExplodeTile PROC, blastX:DWORD, blastY:DWORD
 	
+
 	push eax
 	push ebx
 
+
+	; Calculates the map index of the affected tile(s)
 	mov eax, blastY
 	imul eax, MAP_WIDTH
 	add eax, blastX
 
+	
+	; Reads tile at the calculated pos
 	mov bl, map[eax]
 
+
+	; Walls stop the explosion
 	cmp bl, WALL
 	je ExplodeDone
 
+
+	; Destructible blocks are removed
 	cmp bl, BLOCK
 	je DestroyBlock
 
+
+	; The player blows up and dies
 	cmp bl, PLAYER
 	je KillPlayer
 
+
 	jmp ExplodeDone
+
 
 DestroyBlock:
 
+	
+	; Replaces destroyed block with an empty space
 	INVOKE UpdateTile, eax, EMPTY
 
+
+	; Updates block appearance on the screen
 	INVOKE DrawSingleTile, blastX, blastY, EMPTY
+
+
 	jmp ExplodeDone
+
 
 KillPlayer:
 
+	
+	; Game end
 	mov finish, 1
 
+
 ExplodeDone:
+
 
 	pop ebx
 	pop eax
 	
+
 	ret
+
 
 ExplodeTile ENDP
 
+
+; Checks the four directions around the bomb and removes it
 Explode PROC
 
+
+	; Check tile above bomb
 	movzx eax, bombX
 	movzx ebx, bombY
 	dec ebx
 
+
 	INVOKE ExplodeTile, eax, ebx
 
+
+	; Check tile below bomb
 	movzx eax, bombX
 	movzx ebx, bombY
 	inc ebx
 
+
 	INVOKE ExplodeTile, eax, ebx
 
+
+	; Check tile left of bomb
 	movzx eax, bombX
 	dec eax
 	movzx ebx, bombY
 
+
 	INVOKE ExplodeTile, eax, ebx
 	
+
+	; Check tile right of bomb
 	movzx eax, bombX
 	inc eax
 	movzx ebx, bombY
 
+
 	INVOKE ExplodeTile, eax, ebx
 
+
+	; Caclulates the bomb pos
 	movzx eax, bombY
 	imul eax, MAP_WIDTH
 	movzx ebx, bombX
 	add eax, ebx
 
+
+	; Removes bomb from map
 	INVOKE UpdateTile, eax, EMPTY
 
+
+	; Redraws the bomb tile as empty
 	movzx eax, bombX
 	movzx ebx, bombY
+
+
 	INVOKE DrawSingletile, eax, ebx, EMPTY
 
+
+	; Resets bomb variables
 	mov activeBomb, 0
 	mov bombTurns, 0
 
+
 	ret
 
+
 Explode ENDP
+
 
 END
