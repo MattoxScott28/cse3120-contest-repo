@@ -123,6 +123,15 @@ SpecialBlockPos:
 	mov specialY, eax
 
 
+	; Avoid certain areas where the player spawns and around the player spawn
+	cmp specialY, 2
+	jg PlaceSpecialBlock
+
+	
+	cmp specialX, 2
+	jle SpecialBlockPos
+
+
 	pop esi
 	pop edi
 	pop ebx
