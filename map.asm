@@ -209,6 +209,13 @@ DrawTile:
 	add eax, 2
 	mov dl, al
 
+	mov eax, tileY
+	imul eax, 2
+	mov dh, al
+
+	callGoToXY
+
+
 
 	ret 
 
