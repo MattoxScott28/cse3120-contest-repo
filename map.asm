@@ -182,6 +182,12 @@ DrawTile:
 
 	DisplayMap ENDP
 
+	PUBLIC UpdateTile
+
+	UpdateTile PROC, titleIndex:DWORD, newTile:DWORD
+
+	UpdateTile ENDP
+
 
 END
 
