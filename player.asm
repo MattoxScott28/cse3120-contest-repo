@@ -475,6 +475,14 @@ mov al, 0
 ret
 
 PlaceBomb PROC
+	
+	cmp activeBomb, 1
+	
+	mov activeBomb, 1
+	mov bombTurns, 2
+
+	mov al, 2
+	ret
 
 PlaceBomb ENDP
 
