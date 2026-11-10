@@ -32,17 +32,24 @@ main PROC
     ; Initialize random number generator for map generation
     call Randomize
 
-    ; Display the start screen
-    mov dh,15
-    mov dl,55
-    call GoToXY
+
+StartGame:
 
 
-    mov edx,OFFSET startMessage
-    call WriteString
-    
-    
-; Does not do anything until player presses W to start the game
+    ; Reset game
+    mov finish, 0
+    mov xPos, 1
+    mov yPos, 1
+
+
+    ; Clrscr and generate new map
+    call Clrscr
+    call GenMap
+
+
+    call DisplayMap
+
+   
 StartScreen:
     
     call ReadChar
