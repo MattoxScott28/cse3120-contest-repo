@@ -263,6 +263,17 @@ DrawTile:
 	call WriteChar
 	call WriteChar
 
+	mov eax, tileX
+	imul eax, 4
+	mov dl, al
+
+	mov eax, tileY
+	imul eax, 2
+	inc eax
+	mov dh, al
+
+	call GoToXY
+
 	pop edx
 	pop eax
 
