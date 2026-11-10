@@ -429,6 +429,7 @@ mov dl,2Eh
 ret
 
 Invalid:
+mov al, 0
 ret
 
 
