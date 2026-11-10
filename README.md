@@ -44,7 +44,8 @@ The project requires:
 3. Build Solution.
 4. If building the solution doesn't work, make sure you exclude any files that are not .asm or .inc (but only after trying to build).
 5. Pray that the solution is built.
-6. Have fun!
+6. If the solution is built, I suggest using Ctrl + F5 to play (or just build again)
+7. Have fun!
    
 ## Contributors
 
