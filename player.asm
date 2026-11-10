@@ -640,6 +640,12 @@ ExplodeTile ENDP
 
 Explode PROC
 
+	movzx eax, bombX
+	movzx ebx, bombY
+	dec ebx
+
+	INVOKE ExplodeTile, eax, ebx
+
 Explode ENDP
 
 END
