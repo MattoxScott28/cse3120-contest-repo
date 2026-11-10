@@ -5,7 +5,6 @@ INCLUDE Bomberman.inc
 myString3 BYTE "GetMove is working",0
 bombX BYTE 0
 bombY BYTE 0
-finish BYTE 0
 activeBomb BYTE 0
 bombTurns BYTE 0
 EXTERN xPos : BYTE
@@ -587,7 +586,7 @@ ProcessTurn PROC
 	dec bombTurns
 
 	cmp bombTurns, 0
-	je TurnOver
+	jne TurnOver
 
 	call Explode
 
@@ -666,7 +665,7 @@ Explode PROC
 	INVOKE ExplodeTile, eax, ebx
 
 	movzx eax, bombX
-	movzx eax, bombY
+	movzx ebx, bombY
 
 	INVOKE DrawSingletile, eax, ebx, EMPTY
 

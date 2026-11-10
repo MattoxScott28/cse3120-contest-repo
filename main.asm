@@ -6,6 +6,8 @@ INCLUDE Bomberman.inc
 
 ExitProcess PROTO, dwExitCode:DWORD
 
+PUBLIC finish
+
 .data
 myString BYTE "Press W to begin",0
 myString2 BYTE "PLACEHOLDER Game has begun",0
@@ -15,6 +17,7 @@ xPos BYTE 0
 yPos BYTE 0
 map BYTE (MAP_WIDTH * MAP_HEIGHT) DUP(?)
 finish BYTE 0
+
 .code
 main PROC
 

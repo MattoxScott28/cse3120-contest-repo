@@ -15,8 +15,8 @@ PLAYER EQU 'P'
 ;Player variables
 EXTERNDEF xPos : BYTE
 EXTERNDEF yPos : BYTE
-
 EXTERNDEF map : BYTE
+EXTERNDEF finish : BYTE
 
 ;procedure protos
 GenMap PROTO
