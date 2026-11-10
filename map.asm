@@ -197,7 +197,7 @@ DrawTile:
 
 	UpdateTile ENDP
 
-	PUBLIC DrawTile
+	PUBLIC DrawSingleTile
 
 	DrawSingleTile PROC, tileX:DWORD, tileY:DWORD, tileChar:DWORD
 
@@ -213,7 +213,7 @@ DrawTile:
 	imul eax, 2
 	mov dh, al
 
-	callGoToXY
+	call GoToXY
 
 	mov eax, 08h
 
