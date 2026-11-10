@@ -215,6 +215,19 @@ DrawTile:
 
 	callGoToXY
 
+	mov eax, 08h
+
+	cmp tileChar, WALL
+	je TileWall
+	cmp tileChar, BLOCK
+	je TileBlock
+	cmp tileChar, PLAYER
+	je TilePlayer
+	cmp tileChar, 'B'
+	je TileBomb
+
+	jmp TileDraw
+
 
 
 	ret 
