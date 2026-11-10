@@ -107,6 +107,22 @@ NextCell:
 	mov BYTE PTR map[31], EMPTY
 
 
+;Randomly selects a valid pos for the special block
+SpecialBlockPos:
+
+
+	mov eax, MAP_WIDTH-2
+	call RandomRange
+	inc eax
+	mov specialX, eax
+
+
+	mov eax, MAP_HEIGHT-2
+	call RandomRange
+	inc eax
+	mov specialY, eax
+
+
 	pop esi
 	pop edi
 	pop ebx
