@@ -5,6 +5,8 @@ INCLUDE Bomberman.inc
 myString3 BYTE "GetMove is working",0
 bombX BYTE 0
 bombY BYTE 0
+bombActive BYTE 0
+bombTurns BYTE 0
 EXTERN xPos : BYTE
 EXTERN yPos : BYTE
 EXTERN map : BYTE
