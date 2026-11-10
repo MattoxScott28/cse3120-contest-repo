@@ -40,11 +40,13 @@ GetMove PROC
   cmp ah,4Dh
   je Right
   
-  cmp al, 'E'
-  je Bomb
+  ;cmp al, 'E'
+  ;je Bomb
 
-  mov al, 0
-  ret
+  ;mov al, 0
+  ;ret
+
+  jmp Invalid
 
 Up:
 
