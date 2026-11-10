@@ -241,7 +241,8 @@ DrawTile:
 	jmp TileDraw
 
 	TileBomb:
-	mov eax, 0Ch
+	mov eax, 00h
+	jmp TileDraw
 
 	TileDraw:
 	call SetTextColor
