@@ -657,7 +657,12 @@ Explode PROC
 	movzx ebx, bombY
 
 	INVOKE ExplodeTile, eax, ebx
+	
+	movzx eax, bombX
+	inc eax
+	movzx ebx, bombY
 
+	INVOKE ExplodeTile, eax, ebx
 
 Explode ENDP
 
