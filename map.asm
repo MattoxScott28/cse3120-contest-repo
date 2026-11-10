@@ -232,6 +232,17 @@ DrawTile:
 	mov eax, 07h
 	jmp TileDraw
 
+	TileBlock:
+	mov eax, 0Eh
+	jmp TileDraw
+
+	TilePlayer:
+	mov eax, 0Ah
+	jmp TileDraw
+
+	TileBomb:
+	mov eax, 0Ch
+
 	ret 
 
 	DrawTile ENDP
