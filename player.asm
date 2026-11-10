@@ -546,6 +546,16 @@ CheckBomb:
 	cmp BYTE PTR map[eax], EMPTY
 	jne Dud
 	
+	mov bombX, bl
+	mov bombY, dl
+
+	movzx eax, bombY
+	imul eax, MAP_WIDTH
+	movzx ebx, bombX
+	add eax, ebx
+
+	INVOKE UpdateTile, eax, 'B'
+
 Dud:
 
 
