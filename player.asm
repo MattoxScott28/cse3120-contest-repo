@@ -123,20 +123,22 @@ cmp xPos, 1
 je Invalid
 
 movzx eax, yPos
-imul eax, 15
+imul eax, MAP_WIDTH
 
 movzx ebx, xPos
 dec ebx
-
 add eax,ebx
 
 mov dl, map[eax] ; READD THIS LINE ONCE MAP HAS BEEN PUBLICLY DECLARED
 
 ; If the tile the player is trying to move to is a wall or breakable block, jump to Invalid
-cmp dl, 'X'
+cmp dl, WALL
 je Invalid
 
-cmp dl, 'U'
+cmp dl, BLOCK
+je Invalid
+
+cmp dl, 'B'
 je Invalid
 
 ; If the player is in bomb placing mode (esi = 1), jump to BombPlaceLeft
