@@ -107,7 +107,7 @@ Victory:
     call WriteString
 
 
-    jmp ExitGame
+    jmp EndScreen
 
 
 GameEnd:
