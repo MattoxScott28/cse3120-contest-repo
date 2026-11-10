@@ -138,6 +138,26 @@ EndScreen:
 
     mov edx, OFFSET restartMessage
     call WriteString
+
+
+Options:
+
+
+    call ReadChar
+    and al, 0dfh
+
+
+    cmp al, 'R'
+    je StartGame
+
+
+    cmp al, 'Q'
+    je ExitGame
+
+
+    jmp Options
+
+
 ExitGame:
 
 
