@@ -526,6 +526,19 @@ PlaceBombRight:
 
 	inc ebx
 	jmp CheckBomb
+
+CheckBomb:
+	
+	cmp ebx, 1
+	jl Dud
+	cmp ebx, MAP_WIDTH-2
+	jg Dud
+
+	cmp edx, 1
+	jl Dud
+	cmp edx, MAP_HEIGHT-2
+	jg Dud
+
 	
 Dud:
 
