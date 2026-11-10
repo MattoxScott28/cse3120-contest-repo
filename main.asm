@@ -1,5 +1,5 @@
 INCLUDE Irvine32.inc ; This one probably declares the model?
-;if we declare it in bomberman.inc we should be all good, gonna keep it here for now just because redundancy
+                     ; If we declare it in bomberman.inc we should be all good, gonna keep it here for now just because redundancy
 INCLUDE Bomberman.inc 
 
 .stack 4096
@@ -9,6 +9,7 @@ ExitProcess PROTO, dwExitCode:DWORD
 .data
 myString BYTE "Press W to begin",0
 myString2 BYTE "PLACEHOLDER Game has begun",0
+
 ; Variables we will use to keep track of the player
 xPos BYTE 0
 yPos BYTE 0
@@ -17,8 +18,10 @@ finish BYTE 0
 .code
 main PROC
 
+     ;Once more, randomize will quite literally randomize the map
     call Randomize
 
+    ; Start Screen
     ; Set the cursor to the center of the screen and write Press W to begin
     mov dh,15
     mov dl,55

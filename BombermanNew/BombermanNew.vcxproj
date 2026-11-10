@@ -138,7 +138,6 @@
     <MASM Include="..\map.asm">
       <FileType>Document</FileType>
     </MASM>
-    <None Include="..\loading-screen.asm" />
     <MASM Include="..\main.asm">
       <FileType>Document</FileType>
     </MASM>
