@@ -48,6 +48,9 @@ main PROC
      call GenMap
      mov xPos, 1
      mov yPos, 1
+     
+     call DisplayMap
+
     game:
      call GetMove
 
