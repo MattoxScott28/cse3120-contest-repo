@@ -243,6 +243,18 @@ DrawTile:
 	TileBomb:
 	mov eax, 0Ch
 
+	TileDraw:
+	call SetTextColor
+
+	mov al, 219
+	call WriteChar
+	call WriteChar
+	call WriteChar
+	call WriteChar
+
+	pop edx
+	pop eax
+
 	ret 
 
 	DrawTile ENDP
