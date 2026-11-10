@@ -505,13 +505,27 @@ PlaceBomb PROC
 	cmp ah, 4Dh
 	je PlaceBombRight
 
+	jmp Dud
+
 PlaceBombUp:
+	
+	dec edx
+	jmp CheckBomb
 
 PlaceBombDown:
 
+	inc edx
+	jmp CheckBomb
+
 PlaceBombLeft:
 
+	dec ebx
+	jmp CheckBomb
+
 PlaceBombRight:
+
+	inc ebx
+	jmp CheckBomb
 	
 Dud:
 
