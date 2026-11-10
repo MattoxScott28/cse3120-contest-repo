@@ -261,6 +261,15 @@ INVOKE UpdateTile, eax, EMPTY
 
 inc xPos
 
+movzx eax, yPos
+imul eax, MAP_WIDTH
+movzx ebx, xPos
+add eax, ebx
+
+INVOKE UpdateTIle, eax, PLAYER
+mov al, 1
+ret
+
 ; If the player is in bomb placing mode (esi = 1), jump to BombPlaceRight
 ;cmp esi,1
 ;je BombPlaceRight
