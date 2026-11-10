@@ -127,6 +127,17 @@ GameEnd:
     jmp EndScreen
 
 
+EndScreen:
+
+
+    ; Display restart and quit options
+    mov dh, 14
+    mov dl, 45
+    call GoToXY
+
+
+    mov edx, OFFSET restartMessage
+    call WriteString
 ExitGame:
 
 
