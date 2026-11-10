@@ -477,6 +477,13 @@ ret
 PlaceBomb PROC
 	
 	cmp activeBomb, 1
+	je Dud
+
+	call ReadChar
+	and AL, 0DFh
+
+	movzx ebx, xPos
+	movzx edx, yPos
 	
 	mov activeBomb, 1
 	mov bombTurns, 2
