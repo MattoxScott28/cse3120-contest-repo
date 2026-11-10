@@ -246,6 +246,17 @@ DrawTile:
 	TileDraw:
 	call SetTextColor
 
+	mov eax, tileX
+	imul eax, 4
+	mov dl, al
+
+	mov eax, tileY
+	imul eax, 2
+	mov dh, al
+
+	call GoToXY
+
+
 	mov al, 219
 	call WriteChar
 	call WriteChar
