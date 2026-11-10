@@ -618,6 +618,15 @@ ExplodeTile PROC, blastX:DWORD, blastY:DWORD
 
 	jmp ExplodeDone
 
+DestroyBlock:
+
+jmp ExplodeDone
+
+KillPlayer:
+
+ExplodeDone:
+
+ret
 
 ExplodeTile ENDP
 
