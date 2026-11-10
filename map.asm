@@ -199,7 +199,7 @@ DrawTile:
 
 	PUBLIC DrawTile
 
-	DrawTile PROC, tileX:DWORD, tileY:DWORD, tileChar:DWORD
+	DrawSingleTile PROC, tileX:DWORD, tileY:DWORD, tileChar:DWORD
 
 	push eax
 	push edx
@@ -257,6 +257,6 @@ DrawTile:
 
 	ret 
 
-	DrawTile ENDP
+	DrawSingleTile ENDP
 END
 
