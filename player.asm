@@ -573,6 +573,11 @@ ExplodeTile PROC, blastX:DWORD, blastY:DWORD
 	je DestroyBlock
 
 
+	; Check special block
+	cmp bl, SPECIAL_BLOCK
+	je RevealExit
+
+
 	; The player blows up and dies
 	cmp bl, PLAYER
 	je KillPlayer
@@ -581,6 +586,18 @@ ExplodeTile PROC, blastX:DWORD, blastY:DWORD
 	jmp ExplodeDone
 
 
+RevealExit:
+
+
+	; Replace special block with exit tile
+	INVOKE UpdateTile, eax, EXIT_TILE
+
+	
+	;Draw revealed exit
+	INVOKE DrawSingleTile, blastX, blastY, EXIT_TILE
+
+
+	jmp ExplodeDone
 DestroyBlock:
 
 	
