@@ -664,9 +664,15 @@ Explode PROC
 
 	INVOKE ExplodeTile, eax, ebx
 
+	movzx eax, bombY
+	imul eax, MAP_WIDTH
+	movzx ebx, bombX
+	add eax, ebx
+
+	INVOKE UpdateTile, eax, EMPTY
+
 	movzx eax, bombX
 	movzx ebx, bombY
-
 	INVOKE DrawSingletile, eax, ebx, EMPTY
 
 	mov activeBomb, 0
