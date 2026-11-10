@@ -558,6 +558,11 @@ CheckBomb:
 
 	INVOKE UpdateTile, eax, 'B'
 
+	movzx eax, bombX
+	movzx ebx, bombY
+
+	INVOKE DrawSingleTile, eax, ebx, 'B'
+
 	mov activeBomb, 1
 	mov bombTurns, 2
 
@@ -571,5 +576,20 @@ Dud:
 
 PlaceBomb ENDP
 
+ProcessTurn PROC
+	
+	cmp activeBomb, 1
+	jne TurnOver
+
+	dec bombTurns
+
+	cmp bombTurns, 0
+	je TurnOver
+
+TurnOver:
+
+	ret
+
+ProcessTurn ENDP
 
 END

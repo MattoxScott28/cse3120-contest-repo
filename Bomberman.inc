@@ -24,3 +24,4 @@ DisplayMap PROTO
 GetMove PROTO
 UpdateTile PROTO, tileIndex:DWORD, newTile:DWORD
 DrawSingleTile PROTO, tileX:DWORD, tileY:DWORD, tileChar:DWORD
+ProcessTurn PROTO
