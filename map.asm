@@ -349,6 +349,10 @@ DrawSingleTile PROC, tileX:DWORD, tileY:DWORD, tileChar:DWORD
 	je TileBomb
 
 
+	cmp tileChar, SPECIAL_BLOCK
+	je TileSpecialBlock
+
+
 	jmp TileDraw
 
 
@@ -377,6 +381,13 @@ TileBomb:
 
 
 	mov eax, 0Ch
+	jmp TileDraw
+
+
+TileSpecialBlock:
+
+
+	mov eax, 0Dh
 	jmp TileDraw
 
 
