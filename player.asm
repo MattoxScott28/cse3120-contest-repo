@@ -332,38 +332,38 @@ ret
 ;je Left
 
 ;cmp al, 'S'
-je Down
+;je Down
 
-cmp al, 'D'
-je Right
+;cmp al, 'D'
+;je Right
 
 
 ; Once again reads char for wasd or arrow key, the player can place the bomb in any of their cardinal directions
 ; Does the same checks as up, down, left, right (we could possibly reuse the labels with some code rewriting?)
 ; Once the bomb is placed, I'm not sure whether we want it to be timed (if thats feasible) or if we want it to be reactive, once the player moves twice
-ret
+;ret
 
-BombExplode:
+;BombExplode:
 
 ; Checks above a bomb for a breakable block, replaces it with an empty space if so
-checkUp:
-movzx eax, bombY
-dec eax
+;checkUp:
+;movzx eax, bombY
+;dec eax
 
-imul eax, 15
+;imul eax, 15
 
-movzx ebx, bombX
-add eax,ebx
+;movzx ebx, bombX
+;add eax,ebx
 
-mov dl, map[eax]
+;mov dl, map[eax]
 
-cmp dl, '0'
-jne checkRight
-mov dl, 2Eh
+;cmp dl, '0'
+;jne checkRight
+;mov dl, 2Eh
 ; UpdateTile to replace the block with an empty space
 
 ; Checks to the right of a bomb for a breakable block, replaces it with an empty space if so
-checkRight:
+;checkRight:
 
 movzx eax, bombY
 imul eax, MAP_WIDTH
