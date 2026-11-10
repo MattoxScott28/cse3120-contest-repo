@@ -484,7 +484,17 @@ PlaceBomb PROC
 
 	movzx ebx, xPos
 	movzx edx, yPos
+
+	cmp al, 'W'
+	je PlaceBombUp
+	cmp ah, 48h
+	je PlaceBombUp
+
+PlaceBombUp:
 	
+Dud:
+
+
 	mov activeBomb, 1
 	mov bombTurns, 2
 
