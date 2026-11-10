@@ -210,6 +210,10 @@ MapC:
 	je DrawPlayer
 
 
+	cmp dl, SPECIAL_BLOCK
+	je DrawSpecialBlock
+
+
 	; Floor/empty space
 	; https://kommodo.ai/i/6PSgOykpkPL3MA4wKhxv
 	; This link is safe I promise
@@ -236,6 +240,12 @@ DrawPlayer:
 	mov eax, 0Ah
 	jmp DrawTile
 
+
+DrawSpecialBlock:
+
+
+	mov eax, 0Dh
+	jmp DrawTile
 
 DrawTile:
 
