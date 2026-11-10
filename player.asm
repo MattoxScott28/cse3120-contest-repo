@@ -26,7 +26,7 @@ ResetBombState PROC
 	mov activeBomb, 0
 	mov bombTurns, 0
 	mov bombX, 0
-	mov, bombY, 0
+	mov bombY, 0
 
 
 	ret
