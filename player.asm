@@ -588,6 +588,8 @@ ProcessTurn PROC
 	cmp bombTurns, 0
 	je TurnOver
 
+	call Explode
+
 TurnOver:
 
 	ret
