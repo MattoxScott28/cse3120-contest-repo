@@ -539,6 +539,12 @@ CheckBomb:
 	cmp edx, MAP_HEIGHT-2
 	jg Dud
 
+	mov eax, edx
+	imul eax, MAP_WIDTH
+	add eax, ebx
+
+	cmp BYTE PTR map[eax], EMPTY
+	jne Dud
 	
 Dud:
 
