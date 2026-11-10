@@ -44,7 +44,7 @@ StartScreen:
     and AL, 0DFh
 
     cmp al,'W'
-    je begin
+    je Begin
 
     jmp StartScreen
      
@@ -80,11 +80,11 @@ CheckFinish:
 
     ; Checks whether player lost or beat the game
     cmp finish, 1
-    je gameEnd
+    je GameEnd
 
-    jmp game
+    jmp Game
 
-gameEnd:
+GameEnd:
 
     ; exits the game = Equivalent to EXITPROCESS
     exit
