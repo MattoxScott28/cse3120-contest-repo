@@ -2,7 +2,7 @@
 
 ;Board dimensions - will most likely change to a larger map size
 
-MAP_WIDTH EQU 15is 
+MAP_WIDTH EQU 15
 MAP_HEIGHT EQU 13
 
 ; Characters translating to tiles

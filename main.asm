@@ -21,6 +21,7 @@ map BYTE (MAP_WIDTH * MAP_HEIGHT) DUP(?)
 finish BYTE 0
 
 .code
+
 main PROC
 
     ; Initialize random number generator for map generation
@@ -30,51 +31,66 @@ main PROC
     mov dh,15
     mov dl,55
     call GoToXY
+
+
     mov edx,OFFSET startMessage
     call WriteString
     
     
-    ; Loop until W is pressed by the user, once it is enter the begin label
-    StartScreen:
-     call ReadChar
-     and AL, 0DFh
-     cmp al,'W'
-     je begin
-     jmp StartScreen
+; Does not do anything until player presses W to start the game
+StartScreen:
+    
+    call ReadChar
+    and AL, 0DFh
+
+    cmp al,'W'
+    je begin
+
+    jmp StartScreen
      
      
-    ; Begin the game
-    begin:
-     call clrscr
+; Begin the game
+Begin:
+    
+    ; Clears the start screen
+    call clrscr
 
-     ;mov edx,OFFSET myString2
-     ;call WriteString
-     call GenMap
-     mov xPos, 1
-     mov yPos, 1
+    ; Generates a new map and inits player pos
+    call GenMap
+
+
+    mov xPos, 1
+    mov yPos, 1
      
-     call DisplayMap
+    ; Displays the randomly generated map
+    call DisplayMap
 
-    game:
-     call GetMove
+Game:
 
-     cmp al, 1
-     jne CheckFinish
+    ; Reads the player input
+    call GetMove
 
-     call ProcessTurn
+    ; processes bomb countdown after a successful movement
+    cmp al, 1
+    jne CheckFinish
+
+    call ProcessTurn
 
 CheckFinish:
 
+    ; Checks whether player lost or beat the game
     cmp finish, 1
     je gameEnd
 
     jmp game
 
 gameEnd:
-exit
+
+    ; exits the game = Equivalent to EXITPROCESS
+    exit
     
-    ;INVOKE ExitProcess, 0
-    ;using exit from irvine instead of doing exitprocess
+    
 
 main ENDP
+
 END main
