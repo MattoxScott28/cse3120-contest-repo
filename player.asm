@@ -42,8 +42,8 @@ GetMove PROC
   cmp ah,4Dh
   je Right
   
-  ;cmp al, 'E'
-  ;je Bomb
+  cmp al, 'E'
+  je Bomberman
 
   ;mov al, 0
   ;ret
@@ -466,10 +466,17 @@ ret
 
 ;ret
 
+Bomberman:
+	call PlaceBomb
+	ret
+
 Invalid:
 mov al, 0
 ret
 
+PlaceBomb PROC
+
+PlaceBomb ENDP
 
 GetMove ENDP
 END
