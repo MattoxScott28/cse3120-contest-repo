@@ -196,15 +196,23 @@ MapC:
 	; Read the current tile
 	mov dl, [esi]
 
+
 	; Color selection for the right tile
 	cmp dl, WALL
 	je DrawWall
 
+
 	cmp dl, BLOCK
 	je DrawBlock
 
+
 	cmp dl, PLAYER
 	je DrawPlayer
+
+
+	cmp dl, SPECIAL_BLOCK
+	je DrawSpecialBlock
+
 
 	; Floor/empty space
 	; https://kommodo.ai/i/6PSgOykpkPL3MA4wKhxv
@@ -232,6 +240,12 @@ DrawPlayer:
 	mov eax, 0Ah
 	jmp DrawTile
 
+
+DrawSpecialBlock:
+
+
+	mov eax, 0Dh
+	jmp DrawTile
 
 
 DrawTile:
