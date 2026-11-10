@@ -9,12 +9,12 @@ This project is a Bomberman-inspired game developed using **x86 Assembly (MASM)*
 
 | Key | Action |
 |---|---|
-| W / Up Arrow | Move up |
-| A / Left Arrow | Move left |
-| S / Down Arrow | Move down |
-| D / Right Arrow | Move right |
+| W | Move up |
+| A | Move left |
+| S | Move down |
+| D | Move right |
 | E | Place a bomb |
-| W / A / S / D or Arrow Keys | Select bomb placement direction |
+| W / A / S / D | Select bomb placement direction |
 | R | Restart after winning or losing |
 | Q | Quit after winning or losing |
 
