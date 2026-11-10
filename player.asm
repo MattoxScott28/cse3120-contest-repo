@@ -220,6 +220,10 @@ add eax, ebx
 
 INVOKE UpdateTile, eax, EMPTY
 
+movzx eax, xPos
+movzx ebx, yPos
+INVOKE DrawSingleTile, eax, ebx, EMPTY
+
 inc yPos
 
 movzx eax, yPos
@@ -228,6 +232,11 @@ movzx ebx, xPos
 add eax, ebx
 
 INVOKE UpdateTile, eax, PLAYER
+
+movzx eax, xPos
+movzx ebx, yPos
+INVOKE DrawSingleTile, eax, ebx, PLAYER
+
 mov al, 1
 ret
 
