@@ -141,27 +141,28 @@ je Invalid
 cmp dl, 'B'
 je Invalid
 
-; If the player is in bomb placing mode (esi = 1), jump to BombPlaceLeft
-cmp esi,1
-je BombPlaceLeft
-; If true, move player to PlayerX-1, PlayerY
-sub xPos,1
-mov dl, 50h ; dl should be used to represent what is being put into the updated tile, 50h will represent a player as 50h is the hex value for capital P
-; call UpdateTile ( to my understanding, map[eax] is the tile that needs to be updated, I'm not sure if eax needs to be pushed for this to work or not )
-ret
 
-BombPlaceLeft:
-mov dl, 42h ; dl should be used to represent what is being put into the updated tile, 42h will represent a bomb as 42h is the hex value for capital B
+; If the player is in bomb placing mode (esi = 1), jump to BombPlaceLeft
+;cmp esi,1
+;je BombPlaceLeft
+; If true, move player to PlayerX-1, PlayerY
+;sub xPos,1
+;mov dl, 50h ; dl should be used to represent what is being put into the updated tile, 50h will represent a player as 50h is the hex value for capital P
+; call UpdateTile ( to my understanding, map[eax] is the tile that needs to be updated, I'm not sure if eax needs to be pushed for this to work or not )
+;ret
+
+;BombPlaceLeft:
+;mov dl, 42h ; dl should be used to represent what is being put into the updated tile, 42h will represent a bomb as 42h is the hex value for capital B
 ; call UpdateTile, again uses eax, map[eax] should be the correct tile
 
 ; Store bomb position for future reference
-mov al, xPos
-mov bombX, al
-mov al, yPos
-mov bombY, al
-dec bombX
+;mov al, xPos
+;mov bombX, al
+;mov al, yPos
+;mov bombY, al
+;dec bombX
 
-mov esi,2 ; 2 indicates the player is not in bomb placing mode, but there is a bomb placed currently
+;mov esi,2 ; 2 indicates the player is not in bomb placing mode, but there is a bomb placed currently
 
 ret
 
