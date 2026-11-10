@@ -54,10 +54,18 @@ main PROC
     game:
      call GetMove
 
-     cmp finish,1
-     je gameEnd
+     cmp al, 1
+     jne CheckFinish
 
-     jmp game
+     call ProcessTurn
+
+CheckFinish:
+
+    cmp finish, 1
+    je gameEnd
+
+    jmp game
+
 gameEnd:
 exit
     
