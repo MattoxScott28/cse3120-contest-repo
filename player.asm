@@ -314,24 +314,24 @@ ret
 
 ;ret
 
-Bomb:
+;Bomb:
 
 ; If there is not a bomb placed (esi=2), Set esi to 1 to indicate bomb placement mode, otherwise jump to invalid
-cmp esi,2
-je Invalid
-mov esi, 1
+;cmp esi,2
+;je Invalid
+;mov esi, 1
 
 ; Read char, same as before but for bomb placement
-call ReadChar
-and AL, 0DFh
+;call ReadChar
+;and AL, 0DFh
 
-cmp al, 'W'
-je Up
+;cmp al, 'W'
+;je Up
 
-cmp al, 'A'
-je Left
+;cmp al, 'A'
+;je Left
 
-cmp al, 'S'
+;cmp al, 'S'
 je Down
 
 cmp al, 'D'
