@@ -638,4 +638,8 @@ ExplodeDone:
 
 ExplodeTile ENDP
 
+Explode PROC
+
+Explode ENDP
+
 END
