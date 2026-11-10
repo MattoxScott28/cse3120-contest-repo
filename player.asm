@@ -620,13 +620,21 @@ ExplodeTile PROC, blastX:DWORD, blastY:DWORD
 
 DestroyBlock:
 
-jmp ExplodeDone
+	INVOKE UpdateTile, eax, EMPTY
+
+	INVOKE DrawSingleTile, blastX, blastY, EMPTY
+	jmp ExplodeDone
 
 KillPlayer:
 
+	mov finish, 1
+
 ExplodeDone:
 
-ret
+	pop ebx
+	pop eax
+	
+	ret
 
 ExplodeTile ENDP
 
