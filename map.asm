@@ -132,6 +132,18 @@ SpecialBlockPos:
 	jle SpecialBlockPos
 
 
+PlaceSpecialBlock:
+
+
+	; Calculate map index and place the special block
+	mov eax, specialY
+	imul eax, MAP_WIDTH
+	add eax, specialX
+
+
+	mov BYTE PTR map[eax], SPECIAL_BLOCK
+
+
 	pop esi
 	pop edi
 	pop ebx
