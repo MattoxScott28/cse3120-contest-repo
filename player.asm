@@ -490,7 +490,14 @@ PlaceBomb PROC
 	cmp ah, 48h
 	je PlaceBombUp
 
+	cmp al, 'A'
+	je PlaceBombLeft
+	cmp Ah, 4Bh
+	je PlaceBombLeft
+
 PlaceBombUp:
+
+PlaceBombLeft:
 	
 Dud:
 
