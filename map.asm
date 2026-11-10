@@ -248,7 +248,7 @@ DrawPlayer:
 DrawSpecialBlock:
 
 
-	mov eax, 0Dh
+	mov eax, 0Eh
 	jmp DrawTile
 
 
@@ -402,7 +402,7 @@ TileBomb:
 TileSpecialBlock:
 
 
-	mov eax, 0Dh
+	mov eax, 0Eh
 	jmp TileDraw
 
 
