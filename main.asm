@@ -113,6 +113,10 @@ Victory:
 
 GameEnd:
 
+
+ExitGame:
+
+
     ; exits the game = Equivalent to EXITPROCESS
     exit
     
