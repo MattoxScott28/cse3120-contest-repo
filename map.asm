@@ -213,6 +213,10 @@ MapC:
 	cmp dl, SPECIAL_BLOCK
 	je DrawSpecialBlock
 
+	
+	cmp dl, EXIT_TILE
+	je DrawExit
+
 
 	; Floor/empty space
 	; https://kommodo.ai/i/6PSgOykpkPL3MA4wKhxv
@@ -246,6 +250,14 @@ DrawSpecialBlock:
 
 	mov eax, 0Dh
 	jmp DrawTile
+
+
+DrawExit:
+
+
+	mov eax, 05h
+	jmp DrawTile
+
 
 DrawTile:
 
