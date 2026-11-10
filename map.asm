@@ -201,6 +201,15 @@ DrawTile:
 
 	DrawTile PROC, tileX:DWORD, tileY:DWORD, tileChar:DWORD
 
+	push eax
+	push edx
+
+	mov eax, tileX
+	imul eax, 4
+	add eax, 2
+	mov dl, al
+
+
 	ret 
 
 	DrawTile ENDP
