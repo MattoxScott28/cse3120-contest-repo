@@ -49,7 +49,6 @@ main PROC
      mov xPos, 1
      mov yPos, 1
     game:
-     call DisplayMap
      call GetMove
 
      cmp finish,1

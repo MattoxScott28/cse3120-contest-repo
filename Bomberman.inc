@@ -23,3 +23,4 @@ GenMap PROTO
 DisplayMap PROTO
 GetMove PROTO
 UpdateTile PROTO, tileIndex:DWORD, newTile:DWORD
+DrawTile PROTO, tileX:DWORD, tileY:DWORD, tileChar:DWORD
