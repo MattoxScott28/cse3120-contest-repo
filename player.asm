@@ -141,6 +141,24 @@ je Invalid
 cmp dl, 'B'
 je Invalid
 
+; remove from old position
+movzx eax, yPos
+imul eax, MAP_WIDTH
+movzx ebx, xPos
+add eax, ebx
+
+INVOKE UpdateTile, eax, EMPTY
+
+dec xPos
+
+movzx eax, yPos
+imul eax, MAP_WIDTH
+movzx ebx, xPos
+add eax, ebx
+
+INVOKE UpdateTile, eax, PLAYER
+mov al, 1
+ret
 
 ; If the player is in bomb placing mode (esi = 1), jump to BombPlaceLeft
 ;cmp esi,1
@@ -149,7 +167,6 @@ je Invalid
 ;sub xPos,1
 ;mov dl, 50h ; dl should be used to represent what is being put into the updated tile, 50h will represent a player as 50h is the hex value for capital P
 ; call UpdateTile ( to my understanding, map[eax] is the tile that needs to be updated, I'm not sure if eax needs to be pushed for this to work or not )
-;ret
 
 ;BombPlaceLeft:
 ;mov dl, 42h ; dl should be used to represent what is being put into the updated tile, 42h will represent a bomb as 42h is the hex value for capital B
@@ -163,8 +180,6 @@ je Invalid
 ;dec bombX
 
 ;mov esi,2 ; 2 indicates the player is not in bomb placing mode, but there is a bomb placed currently
-
-ret
 
 Down:
 ; Check if map[playerX][playerY+1] is an available space
