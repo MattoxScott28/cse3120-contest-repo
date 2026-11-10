@@ -98,6 +98,17 @@ Up:
 	je Invalid
 
 
+	; Check whether the player has reached the exit
+	cmp dl, EXIT_TILE
+	jne ContinueMoveUp
+
+
+	mov finish, 2
+
+
+	ContinueMoveUp:
+
+
 	; Clears the player's prev pos
 	movzx eax, yPos
 	imul eax, MAP_WIDTH
@@ -171,6 +182,17 @@ Left:
 	je Invalid
 
 
+	; Check whether the player has reached the exit
+	cmp dl, EXIT_TILE
+	jne ContinueMoveLeft
+
+
+	mov finish, 2
+
+
+	ContinueMoveLeft:
+
+
 	; remove from old position
 	movzx eax, yPos
 	imul eax, MAP_WIDTH
@@ -241,6 +263,16 @@ Down:
 	je Invalid
 
 
+	; Check whether the player has reached the exit
+	cmp dl, EXIT_TILE
+	jne ContinueMoveDown
+
+
+	mov finish, 2
+
+
+	ContinueMoveDown:
+
 	movzx eax, yPos
 	imul eax, MAP_WIDTH
 	movzx ebx, xPos
@@ -309,6 +341,17 @@ Right:
 
 	cmp dl, 'B'
 	je Invalid
+
+
+	; Check whether the player has reached the exit
+	cmp dl, EXIT_TILE
+	jne ContinueMoveRight
+
+
+	mov finish, 2
+
+
+	ContinueMoveRight:
 
 
 	movzx eax, yPos
@@ -598,6 +641,8 @@ RevealExit:
 
 
 	jmp ExplodeDone
+
+
 DestroyBlock:
 
 	
