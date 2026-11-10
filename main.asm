@@ -12,6 +12,9 @@ PUBLIC finish
 startMessage BYTE "Press W to begin",0
 
 
+; Victory message
+victoryMessage BYTE "Level Complete!",0
+
 ; Variables we will use to keep track of the player
 xPos BYTE 0
 yPos BYTE 0
@@ -82,7 +85,31 @@ CheckFinish:
     cmp finish, 1
     je GameEnd
 
+
+    ; Check if player found the exit
+    cmp finish, 2
+    je Victory
+
+
     jmp Game
+
+
+Victory:
+
+
+    call Clrscr
+
+    mov dh, 15
+    mov dl, 55
+    call GoToXY
+
+
+    mov edx, OFFSET victoryMessage
+    call WriteString
+
+
+    jmp ExitGame
+
 
 GameEnd:
 
