@@ -42,6 +42,10 @@ StartGame:
     mov yPos, 1
 
 
+    ; Reset any rogue bombs
+    call ResetBombState
+
+
     ; Clrscr and generate new map
     call Clrscr
     call GenMap
