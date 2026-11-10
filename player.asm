@@ -417,16 +417,16 @@ ret
 ; UpdateTile to replace the block with an empty space
 
 ; Replaces the bomb with an empty space
-removeBomb:
-movzx eax, bombY
-imul eax,15
+;removeBomb:
+;movzx eax, bombY
+;imul eax,15
 
-movzx ebx, bombX
-add eax,ebx
-mov dl,2Eh
+;movzx ebx, bombX
+;add eax,ebx
+;mov dl,2Eh
 ; UpdateTile to replace the bomb with an empty space
 
-ret
+;ret
 
 Invalid:
 mov al, 0
