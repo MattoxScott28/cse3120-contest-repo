@@ -17,6 +17,22 @@ bombTurns BYTE 0
 
 PUBLIC GetMove
 PUBLIC ProcessTurn
+PUBLIC ResetBombState
+
+
+ResetBombState PROC
+
+
+	mov activeBomb, 0
+	mov bombTurns, 0
+	mov bombX, 0
+	mov, bombY, 0
+
+
+	ret
+
+
+ResetBombState ENDP
 
 
 ; Reads player input and handles both movement and bomb placement
