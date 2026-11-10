@@ -10,6 +10,8 @@ bombTurns BYTE 0
 EXTERN xPos : BYTE
 EXTERN yPos : BYTE
 EXTERN map : BYTE
+EXTERN finish : BYTE
+
 .code
 PUBLIC GetMove
 
