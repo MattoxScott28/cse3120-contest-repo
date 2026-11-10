@@ -184,7 +184,16 @@ DrawTile:
 
 	PUBLIC UpdateTile
 
-	UpdateTile PROC, titleIndex:DWORD, newTile:DWORD
+	UpdateTile PROC, tileIndex:DWORD, newTile:DWORD
+
+		; loading map index and new char
+		mov eax, tileIndex
+		mov edx, newTile
+
+		; replace existing char in the map
+		mov map[eax], dl
+
+		ret
 
 	UpdateTile ENDP
 
