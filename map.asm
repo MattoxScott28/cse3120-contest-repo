@@ -20,7 +20,6 @@ EXTERN yPos : BYTE
 .code
 ; Generates a random map with the following
 ; Permanent border, Destructible Blocks, Player, and a Special Destructible Block meant to send you to the next level
-; Special Destructible Block has not been implemented yet
 GenMap Proc
 
 	push eax
