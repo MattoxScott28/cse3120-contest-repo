@@ -598,6 +598,15 @@ ProcessTurn ENDP
 
 ExplodeTile PROC, blastX:DWORD, blastY:DWORD
 	
+	push eax
+	push ebx
+
+	mov eax, blastY
+	imul eax, MAP_WIDTH
+	add eax, blastX
+
+	mov bl, map[eax]
+
 
 ExplodeTile ENDP
 
