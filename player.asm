@@ -664,6 +664,11 @@ Explode PROC
 
 	INVOKE ExplodeTile, eax, ebx
 
+	movzx eax, bombX
+	movzx eax, bombY
+
+	INVOKE DrawSingletile, eax, ebx, EMPTY
+
 Explode ENDP
 
 END
