@@ -669,6 +669,11 @@ Explode PROC
 
 	INVOKE DrawSingletile, eax, ebx, EMPTY
 
+	mov activeBomb, 0
+	mov bombTurns, 0
+
+	ret
+
 Explode ENDP
 
 END
