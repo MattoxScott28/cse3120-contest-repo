@@ -3,40 +3,42 @@ INCLUDE Bomberman.inc
 
 .data
 
-EXTERN map : BYTE
+; Stores the starting address of the curr row while drawing map
+rowS DWORD ?
 
+; Access shared variables from main
+EXTERN map : BYTE
 EXTERN xPos : BYTE
 EXTERN yPos : BYTE
 
-rowS DWORD ?
-
-; Want to make the layout grid into 15 x 13 with the walls that do not break as #, player as P, and breakable walls as 0, all other spots are .
 
 .code
-
-;GenMap creates a random map (no duh)
-
+; Generates a random map with the following
+; Permanent border, Destructible Blocks, Player, and a Special Destructible Block meant to send you to the next level
+; Special Destructible Block has not been implemented yet
 GenMap Proc
 
 	push eax
-	push ebx ;tracking row
-	push edi ;tracking col
-	push esi ;poiting to curr location
-
+	push ebx 
+	push edi 
+	push esi
+	
+	;ESI points to the curr position in the map array
 	mov esi, OFFSET map
+
+	;EBX tracks the curr row
 	mov ebx, 0
 
-;generating row
-MapGenR:
 
+MapGenR:
+	
+	;EDI tracks the curr col
 	mov edi, 0
 
-;generating col
+
 MapGenC:
 
-
-	;if you are on the outside of an array then you generate a wall
-	
+	; Makes the outer border of the map indestructible wall	
 	cmp ebx, 0
 	je GenWall
 
@@ -49,128 +51,181 @@ MapGenC:
 	cmp edi, MAP_WIDTH-1
 	je GenWall
 
-	;testing shenanigans
-	
-	;test ebx, 1
-	;jnz RandCell
-
-	;test edi, 1
-	;jz GenWall
-
-RandCell:
+	; Randomly generates a destructible block or empty space
 	mov eax, 4
-	call RandomRange ;random range is an Irvine command that will generate a random number from 0 to the number called minus 1
+	; RandomRange is an Irvine command that gives a random number from 0 to EAX-1
+	; In this case because EAX = 4, it gives (cmp eax, 0) a 25% chance to be a destructible block
+	call RandomRange
 
-	cmp eax, 0 ;trying to make this a 25% chance of a destructible block
+	cmp eax, 0
 	je GenBlock
 
-	;if compare fails then its an empty block
+	; Generate empty tile
 	mov BYTE PTR [esi], EMPTY
 	jmp NextCell
 
 GenWall:
 	
+	; Generates a permanent wall
 	mov BYTE PTR [esi], WALL
 	jmp NextCell
+
+
 GenBlock:
+
+	; Generates a destructible block
 	mov BYTE PTR [esi], BLOCK
+
+
 NextCell:
+
+	; Moves to the next pos in the map
 	inc esi
 	inc edi
 
 	cmp edi, MAP_WIDTH
 	jl MapGenC
 
+	; Moves to next row
 	inc ebx
 
 	cmp ebx, MAP_HEIGHT
 	jl MapGenR
 
+	; Place the player in the upper-left corner of the map that is not an indestructible block
+	; There could be better code here to create a potential difficulty to this by making the number in map[] a variable position so that we could have different map sizes
 	mov BYTE PTR map[16], PLAYER
+	
+	; Ensures that the starting area surrounding the player is set to empty
+	; The two lines below can also be changed by the potential update noted in line 96
 	mov BYTE PTR map[17], EMPTY
 	mov BYTE PTR map[31], EMPTY
+
 
 	pop esi
 	pop edi
 	pop ebx
 	pop eax
+
+
 	ret
 
-	GenMap ENDP
+GenMap ENDP
 
 
-
+; Displays the entire map using a variety of colors for different tile types
 DisplayMap PROC
 
 	push esi
 	push ebx
 	push edi
 
+	; ESI points to the start of the map array
 	mov esi, OFFSET map
 
+	; EBX tracks the number of rows remaining
 	mov ebx, MAP_HEIGHT
+
 
 MapR:
 
+
+	; Saves the start position of the curr map row
 	mov rowS, esi
+
+	; This makes each map tile occupy two console rows (this can look weird on different consoles due to a user changing what their console looks like)
+	; The default settings for a console are highly recommended to play this version of Bomberman in the best quality (that we know of :P )
 	mov ecx, 2
+
 
 DrawRow:
 	
+
+	; Resets ESI to the start of the curr map row
 	mov esi, rowS
+
+	; EDI tracks the number of col remaining
 	mov edi, MAP_WIDTH
+
 
 MapC:
 
+
+	; Read the current tile
 	mov dl, [esi]
 
+	; Color selection for the right tile
 	cmp dl, WALL
 	je DrawWall
+
 	cmp dl, BLOCK
 	je DrawBlock
+
 	cmp dl, PLAYER
 	je DrawPlayer
 
-	;the floor is floor
+	; Floor/empty space
+	; https://kommodo.ai/i/6PSgOykpkPL3MA4wKhxv
+	; This link is safe I promise
 	mov eax, 08h
 	jmp DrawTile
 
 DrawWall:
+
+
 	mov eax, 07h
 	jmp DrawTile
+
+
 DrawBlock:
+
+
 	mov eax, 0Eh
 	jmp DrawTile
+
+
 DrawPlayer:
+
+
 	mov eax, 0Ah
 	jmp DrawTile
 
+
+
 DrawTile:
 
+	
+	; Sets the text color
 	call SetTextColor
 
+	; Not once, not twice, not thrice, but four times
 	mov al, 219
 	call WriteChar
 	call WriteChar
 	call WriteChar
 	call WriteChar
 
+	; Moves to the next map col
 	inc esi
 	dec edi
 
 	jnz MapC
 
+	; Move to the next console row
 	call Crlf
 
-	;gotta do the same for the column just fixing the rows first
+
 	loop DrawRow
 
+
+	; Moves to the next map row
 	mov esi, rowS
 	add esi, MAP_WIDTH
 
 	dec ebx
 	jnz MapR
 
+	; Restores the default console colors
 	mov eax, 07h
 	call SetTextColor
 
@@ -178,95 +233,131 @@ DrawTile:
 	pop ebx
 	pop esi
 
+
 	ret
 
-	DisplayMap ENDP
 
-	PUBLIC UpdateTile
+DisplayMap ENDP
 
-	UpdateTile PROC, tileIndex:DWORD, newTile:DWORD
 
-		; loading map index and new char
+; Changes the char stored at a specific map array index
+PUBLIC UpdateTile
+
+
+UpdateTile PROC, tileIndex:DWORD, newTile:DWORD
+
+
+		; Loads the map index and the new tile char
 		mov eax, tileIndex
 		mov edx, newTile
 
-		; replace existing char in the map
+
+		; Replaces the existing char in the map array
 		mov map[eax], dl
+
 
 		ret
 
-	UpdateTile ENDP
 
-	PUBLIC DrawSingleTile
+UpdateTile ENDP
 
-	DrawSingleTile PROC, tileX:DWORD, tileY:DWORD, tileChar:DWORD
+
+; Draws one tile and not the whole map
+; This is because if we were to update the map every single time there was an action there would be too much movement and procceses 
+PUBLIC DrawSingleTile
+
+
+DrawSingleTile PROC, tileX:DWORD, tileY:DWORD, tileChar:DWORD
+
 
 	push eax
 	push edx
 
-	mov eax, tileX
-	imul eax, 4
-	add eax, 2
-	mov dl, al
-
-	mov eax, tileY
-	imul eax, 2
-	mov dh, al
-
-	call GoToXY
-
+	; Selects the color based on the tile char
 	mov eax, 08h
 
+	
 	cmp tileChar, WALL
 	je TileWall
+
+
 	cmp tileChar, BLOCK
 	je TileBlock
+
+
 	cmp tileChar, PLAYER
 	je TilePlayer
+
+
 	cmp tileChar, 'B'
 	je TileBomb
 
+
 	jmp TileDraw
 
-	TileWall:
+
+TileWall:
+
+
 	mov eax, 07h
 	jmp TileDraw
 
-	TileBlock:
+
+TileBlock:
+
+
 	mov eax, 0Eh
 	jmp TileDraw
 
-	TilePlayer:
+
+TilePlayer:
+
+
 	mov eax, 0Ah
 	jmp TileDraw
 
-	TileBomb:
+
+TileBomb:
+
+
 	mov eax, 0Ch
 	jmp TileDraw
 
-	TileDraw:
+
+TileDraw:
+
+
+	; Applies the correct text color
 	call SetTextColor
 
+
+	; Calculates the console portion of the tile
 	mov eax, tileX
 	imul eax, 4
 	mov dl, al
+
 
 	mov eax, tileY
 	imul eax, 2
 	mov dh, al
 
+
 	call GoToXY
 
 
+	; Draws the first row of the tile
 	mov al, 219
 	call WriteChar
 	call WriteChar
 	call WriteChar
 	call WriteChar
 
+
+	; Moves down one console row
 	mov eax, tileX
 	imul eax, 4
 	mov dl, al
+
 
 	mov eax, tileY
 	imul eax, 2
@@ -275,20 +366,28 @@ DrawTile:
 
 	call GoToXY
 
+
+	; Draws the second row (because again we have thick tiles)
 	mov al, 219
 	call WriteChar
 	call WriteChar
 	call WriteChar
 	call WriteChar
 
+
+	; Restores default console color
 	mov eax, 07h
 	call SetTextColor
+
 
 	pop edx
 	pop eax
 
+
 	ret 
 
-	DrawSingleTile ENDP
+DrawSingleTile ENDP
+
+
 END
 
