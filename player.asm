@@ -607,6 +607,17 @@ ExplodeTile PROC, blastX:DWORD, blastY:DWORD
 
 	mov bl, map[eax]
 
+	cmp bl, WALL
+	je ExplodeDone
+
+	cmp bl, BLOCK
+	je DestroyBlock
+
+	cmp bl, PLAYER
+	je KillPlayer
+
+	jmp ExplodeDone
+
 
 ExplodeTile ENDP
 
