@@ -1,35 +1,36 @@
 INCLUDE Irvine32.inc 
-                     
 INCLUDE Bomberman.inc 
 
 .stack 4096
 
-ExitProcess PROTO, dwExitCode:DWORD
-
+;Makes finish accessible to other asm files
 PUBLIC finish
 
 .data
-myString BYTE "Press W to begin",0
-myString2 BYTE "PLACEHOLDER Game has begun",0
+
+; Startup message
+startMessage BYTE "Press W to begin",0
+
 
 ; Variables we will use to keep track of the player
 xPos BYTE 0
 yPos BYTE 0
 map BYTE (MAP_WIDTH * MAP_HEIGHT) DUP(?)
+
+; Indicates whether the game has ended
 finish BYTE 0
 
 .code
 main PROC
 
-     ;Once more, randomize will quite literally randomize the map
+    ; Initialize random number generator for map generation
     call Randomize
 
-    ; Start Screen
-    ; Set the cursor to the center of the screen and write Press W to begin
+    ; Display the start screen
     mov dh,15
     mov dl,55
     call GoToXY
-    mov edx,OFFSET myString
+    mov edx,OFFSET startMessage
     call WriteString
     
     
