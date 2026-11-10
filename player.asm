@@ -252,6 +252,15 @@ je Invalid
 cmp dl, 'B'
 je Invalid
 
+movzx eax, yPos
+imul eax, MAP_WIDTH
+movzx ebx, xPos
+add eax, ebx
+
+INVOKE UpdateTile, eax, EMPTY
+
+inc xPos
+
 ; If the player is in bomb placing mode (esi = 1), jump to BombPlaceRight
 ;cmp esi,1
 ;je BombPlaceRight
