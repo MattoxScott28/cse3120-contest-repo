@@ -274,6 +274,15 @@ DrawTile:
 
 	call GoToXY
 
+	mov al, 219
+	call WriteChar
+	call WriteChar
+	call WriteChar
+	call WriteChar
+
+	mov eax, 07h
+	call SetTextColor
+
 	pop edx
 	pop eax
 
